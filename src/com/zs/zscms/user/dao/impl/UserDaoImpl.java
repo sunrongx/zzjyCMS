@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.user.bean.UserBean;
 import com.zs.zscms.util.DBUtil;
+import com.zz.cms.exception.SysException;
 
 public class UserDaoImpl implements UserDao {
 	//创建DBUtil对象来连接数据库
@@ -19,26 +19,26 @@ public class UserDaoImpl implements UserDao {
 		//给SQL语句的参数赋值
 		Object [] obj = {user.getLoginname(),user.getPassword()};
 		//执行查询，返回结果
-		List<Map<String,String>> list = db.execQuery(sql,obj);
+		List<Map<String, Object>> list = db.execQuery(sql,obj);
 		//创建list集合来存储user对象
 		List <UserBean> users = new ArrayList<UserBean> ();
 		//遍历集合，将map集合中的数据取出，然后直接封装到userbean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建UserBean对象
 			UserBean userbean = new UserBean();
 			//根据key来取map集合的值
-			userbean.setId(Integer.parseInt(map.get("id")));
-			userbean.setLoginname(map.get("loginname"));
-			userbean.setPassword(map.get("password"));
-			userbean.setRealname(map.get("realname"));
-			userbean.setSex(map.get("sex"));
-			userbean.setBirthday(map.get("birthday"));
-			userbean.setEmail(map.get("email"));
-			userbean.setDept(Integer.parseInt(map.get("dept")));
-			userbean.setEnabled(Integer.parseInt(map.get("enabled")));
-			userbean.setCreatman(Integer.parseInt(map.get("creatman")));
+			userbean.setId(Integer.parseInt((String) map.get("id")));
+			userbean.setLoginname(String.valueOf(map.get("loginname")));
+			userbean.setPassword(String.valueOf(map.get("password")));
+			userbean.setRealname((String) map.get("realname"));
+			userbean.setSex((String) map.get("sex"));
+			userbean.setBirthday((String) map.get("birthday"));
+			userbean.setEmail((String) map.get("email"));
+			userbean.setDept(Integer.parseInt((String) map.get("dept")));
+			userbean.setEnabled(Integer.parseInt((String) map.get("enabled")));
+			userbean.setCreatman(Integer.parseInt(String.valueOf( map.get("creatman"))));
 			if(map.get("deptname")!=null){
-				userbean.setDeptname(map.get("deptname"));
+				userbean.setDeptname((String) map.get("deptname"));
 			}
 			if(userbean.getEnabled()==1){
 				userbean.setEnabledTxt("可用");
@@ -60,26 +60,26 @@ public class UserDaoImpl implements UserDao {
 		//用三元运算符与sql语句拼串，结果相当于：select * from tuser where 1=1 and id=?
 		//String sql="select * from tuser where 1=1"+(TiaoJian==null?"":TiaoJian);
 		//创建listmap集合存储信息
-		List<Map<String,String>> list =db.execQuery(sql,obj);
+		List<Map<String, Object>> list =db.execQuery(sql,obj);
 		//创建集合来存储对象
 		List <UserBean> users = new ArrayList<UserBean>();
 		//遍历集合，将数据从map集合中取出然后直接封装到userbean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建UserBean对象
 			UserBean userbean = new UserBean();
 			//根据key来取map集合的值
-			userbean.setId(Integer.parseInt(map.get("id")));
-			userbean.setLoginname(map.get("loginname"));
-			userbean.setPassword(map.get("password"));
-			userbean.setRealname(map.get("realname"));
-			userbean.setSex(map.get("sex"));
-			userbean.setBirthday(map.get("birthday"));
-			userbean.setEmail(map.get("email"));
-			userbean.setDept(Integer.parseInt(map.get("dept")));
-			userbean.setEnabled(Integer.parseInt(map.get("enabled")));
-			userbean.setCreatman(Integer.parseInt(map.get("creatman")));
+			userbean.setId(Integer.parseInt((String) map.get("id")));
+			userbean.setLoginname((String) map.get("loginname"));
+			userbean.setPassword((String) map.get("password"));
+			userbean.setRealname((String) map.get("realname"));
+			userbean.setSex((String) map.get("sex"));
+			userbean.setBirthday((String) map.get("birthday"));
+			userbean.setEmail((String) map.get("email"));
+			userbean.setDept(Integer.parseInt((String) map.get("dept")));
+			userbean.setEnabled(Integer.parseInt((String) map.get("enabled")));
+			userbean.setCreatman(Integer.parseInt((String) map.get("creatman")));
 			if(map.get("deptname")!=null){
-				userbean.setDeptname(map.get("deptname"));
+				userbean.setDeptname((String) map.get("deptname"));
 			}
 			if(userbean.getEnabled()==1){
 				userbean.setEnabledTxt("可用");
@@ -198,9 +198,9 @@ public class UserDaoImpl implements UserDao {
 		// TODO 自动生成的方法存根
 		//通过count方法获取总行数并命名为count
 		String sql = "select count(id) count from tuser";
-		List<Map<String,String>> list = db.execQuery(sql,null);
+		List<Map<String, Object>> list = db.execQuery(sql,null);
 		//获取count的值
-		int userCounts = Integer.parseInt(list.get(0).get("count"));
+		int userCounts = Integer.parseInt((String) list.get(0).get("count"));
 		
 		return userCounts;
 	}

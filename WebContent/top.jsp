@@ -15,9 +15,10 @@
     <td width="61%" height="64"><img src="images/logo.gif" width="262" height="64"></td>
     <td width="39%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="74%" height="38" class="admin_txt"><b> ${ userBean.realname }&nbsp;&nbsp;您好！ </b> &nbsp;&nbsp;
+        <td width="74%" height="38" class="admin_txt"><b> 1${userBean.loginname }1&nbsp;&nbsp;您好！ </b> &nbsp;&nbsp;
         <span id="time" >
 				当前时间：
+				
 				<script>
 				document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());
 				setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);

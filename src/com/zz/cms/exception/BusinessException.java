@@ -1,6 +1,10 @@
-package com.zs.zscms.exception;
+package com.zz.cms.exception;
 
 public class BusinessException extends Exception {
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		// 自定义商业异常
 		private String errMsg;// 异常信息
 		private int errCode;// 异常编码

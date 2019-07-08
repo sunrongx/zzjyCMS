@@ -2,9 +2,9 @@ package com.zs.zscms.tchannel.dao.impl;
 
 import java.util.List;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tarticle.bean.TarticleBean;
 import com.zs.zscms.tchannel.bean.TchannelBean;
+import com.zz.cms.exception.SysException;
 
 public interface TchannelDao {
 	//一个map集合对应一个Tchannelbean

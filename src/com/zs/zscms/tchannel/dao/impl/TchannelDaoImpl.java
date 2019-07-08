@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tchannel.bean.TchannelBean;
 import com.zs.zscms.user.bean.UserBean;
 import com.zs.zscms.util.DBUtil;
+import com.zz.cms.exception.SysException;
 
 public class TchannelDaoImpl implements TchannelDao {
 	//创建数据库连接
@@ -22,24 +22,24 @@ public class TchannelDaoImpl implements TchannelDao {
 		//给SQL语句的参数赋值
 		Object [] obj = {tcha.getCname()};
 		//执行查询，返回结果
-		List<Map<String,String>> list = db.execQuery(sql,obj);
+		List<Map<String, Object>> list = db.execQuery(sql,obj);
 		//创建list集合来存储tcha对象
 		List <TchannelBean> tchas = new ArrayList<TchannelBean> ();
 		//遍历集合，将map集合中的数据取出，然后直接封装到Tchannelbean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建TchannelBean对象
 			TchannelBean tchabean = new TchannelBean();
 			//根据key来取map集合的值
-			tchabean.setId(Integer.parseInt(map.get("id")));
-			tchabean.setCname(map.get("cname"));
-			tchabean.setPid(Integer.parseInt(map.get("pid")));
-			tchabean.setLev(Integer.parseInt(map.get("lev")));
+			tchabean.setId(Integer.parseInt((String) map.get("id")));
+			tchabean.setCname((String) map.get("cname"));
+			tchabean.setPid(Integer.parseInt((String) map.get("pid")));
+			tchabean.setLev(Integer.parseInt((String) map.get("lev")));
 			if(tchabean.getLev()==1){
 				tchabean.setStrlev("一级");
 			}else{
 				tchabean.setStrlev("二级");
 			}
-			tchabean.setIsleaf(Integer.parseInt(map.get("isleaf")));
+			tchabean.setIsleaf(Integer.parseInt((String) map.get("isleaf")));
 			if(tchabean.getIsleaf()==1){
 				tchabean.setStrIsleaf("是");
 			}else{
@@ -61,24 +61,24 @@ public class TchannelDaoImpl implements TchannelDao {
 		//用三元运算符与sql语句拼串，结果相当于：select * from tchannel where 1=1 and id=?
 		//String sql="select * from tchannel where 1=1"+(TiaoJian==null?"":TiaoJian);
 		//创建listmap集合存储信息
-		List<Map<String,String>> list =db.execQuery(sql,obj);
+		List<Map<String, Object>> list =db.execQuery(sql,obj);
 		//创建集合来存储对象
 		List <TchannelBean> tchas = new ArrayList<TchannelBean>();
 		//遍历集合，将数据从map集合中取出然后直接封装到Tchannelbean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建TchannelBean对象
 			TchannelBean tchabean = new TchannelBean();
 			//根据key来取map集合的值
-			tchabean.setId(Integer.parseInt(map.get("id")));
-			tchabean.setCname(map.get("cname"));
-			tchabean.setPid(Integer.parseInt(map.get("pid")));
-			tchabean.setLev(Integer.parseInt(map.get("lev")));
+			tchabean.setId(Integer.parseInt((String) map.get("id")));
+			tchabean.setCname((String) map.get("cname"));
+			tchabean.setPid(Integer.parseInt((String) map.get("pid")));
+			tchabean.setLev(Integer.parseInt((String) map.get("lev")));
 			if(tchabean.getLev()==1){
 				tchabean.setStrlev("一级");
 			}else{
 				tchabean.setStrlev("二级");
 			}
-			tchabean.setIsleaf(Integer.parseInt(map.get("isleaf")));
+			tchabean.setIsleaf(Integer.parseInt((String) map.get("isleaf")));
 			if(tchabean.getIsleaf()==1){
 				tchabean.setStrIsleaf("是");
 			}else{

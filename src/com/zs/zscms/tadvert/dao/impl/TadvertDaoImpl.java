@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tadvert.bean.TadvertBean;
 import com.zs.zscms.util.DBUtil;
+import com.zz.cms.exception.SysException;
 
 public class TadvertDaoImpl implements TadvertDao {
 	
@@ -21,19 +21,19 @@ public class TadvertDaoImpl implements TadvertDao {
 		//给sql语句的条件赋值
 		Object [ ] obj = { tadv.getTitle() };
 		//执行查询并返回结果
-		List<Map<String , String>> list =  db.execQuery(sql,obj);
+		List<Map<String, Object>> list =  db.execQuery(sql,obj);
 		//创建list集合来存储user对象
 		List<TadvertBean> tadvs = new ArrayList<TadvertBean>() ;
 		//遍历集合，将map集合中的数据取出，然后直接封装到tadvertbean中
-		for(Map<String ,String> map:list ){
+		for(Map<String, Object> map:list ){
 			//创建tadvertbean对象
 			TadvertBean tadvbean = new TadvertBean();
 			//根据key来取map集合的值
-			tadvbean.setId(Integer.parseInt(map.get("id")));
-			tadvbean.setTitle(map.get("title"));
-			tadvbean.setContent(map.get("content"));
-			tadvbean.setCrtime(map.get("crtime"));
-			tadvbean.setCrman(map.get("crman"));
+			tadvbean.setId(Integer.parseInt((String) map.get("id")));
+			tadvbean.setTitle((String) map.get("title"));
+			tadvbean.setContent((String) map.get("content"));
+			tadvbean.setCrtime((String) map.get("crtime"));
+			tadvbean.setCrman((String) map.get("crman"));
 			
 			// 将tadvertbean对象加入集合中
 			tadvs.add(tadvbean);
@@ -49,20 +49,20 @@ public class TadvertDaoImpl implements TadvertDao {
 		//用三元运算符与sql语句拼串，结果相当于：select * from Tadvert where 1=1 and id=?
 		//String sql="select * from tadvert where 1=1"+(TiaoJian==null?"":TiaoJian);
 		//创建listmap集合存储信息
-		List<Map<String,String>> list =db.execQuery(sql,obj);
+		List<Map<String, Object>> list =db.execQuery(sql,obj);
 		//创建集合来存储对象
 		List <TadvertBean> tadvs = new ArrayList<TadvertBean>();
 		
 		//遍历集合，将map集合中的数据取出，然后直接封装到tadvertbean中
-		for(Map<String ,String> map:list ){
+		for(Map<String, Object> map:list ){
 			//创建tadvertbean对象
 			TadvertBean tadvbean = new TadvertBean();
 			//根据key来取map集合的值
-			tadvbean.setId(Integer.parseInt(map.get("id")));
-			tadvbean.setTitle(map.get("title"));
-			tadvbean.setContent(map.get("content"));
-			tadvbean.setCrtime(map.get("crtime"));
-			tadvbean.setCrman(map.get("crman"));
+			tadvbean.setId(Integer.parseInt((String) map.get("id")));
+			tadvbean.setTitle((String) map.get("title"));
+			tadvbean.setContent((String) map.get("content"));
+			tadvbean.setCrtime((String) map.get("crtime"));
+			tadvbean.setCrman((String) map.get("crman"));
 			
 			// 将tadvertbean对象加入集合中
 			tadvs.add(tadvbean);

@@ -16,7 +16,7 @@ public class DBUtil {
 	// 驱动
 	private String driver = "com.mysql.jdbc.Driver";
 	// 连接地址，参数是支持中文插入
-	private String url = "jdbc:mysql://localhost:3306/zscms?useUnicode=true&characterEncoding=utf-8";
+	private String url = "jdbc:mysql://localhost:3306/cms?useUnicode=true&characterEncoding=utf-8";
 	// 连接用户名
 	private String user = "root";
 	// 连接密码
@@ -90,7 +90,7 @@ public class DBUtil {
 	 * List<Map<String,Object>>不知道查询得到的数据为哪个Bean类型所以用Map来封装数据
 	 * Map的key为数据库字段名，Value为数据库的字段值
 	 */
-	public List<Map<String, String>> execQuery(String sql,Object [] objs){
+	public List<Map<String, Object>> execQuery(String sql,Object [] objs){
 		//获得连接
 		Connection conn = this.getConn();
 		//定义处理对象的变量初始化为null
@@ -98,7 +98,7 @@ public class DBUtil {
 		//定义结果集初始化为null
 		ResultSet rs = null;
 		//定义一个用于存放封装数据的Map集合的List集合
-		List<Map<String, String>> maps = new ArrayList<Map<String,String>>();
+		List<Map<String, Object>> maps = new ArrayList<Map<String,Object>>();
 		try {
 			//从数据库连接中获得处理对象
 			ps=conn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class DBUtil {
 			//依次从结果集中取出值
 			while(rs.next()){
 				//Map集合用于存放一条数据
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, Object> map = new HashMap<String, Object>();
 				//把数据封装到Map
 				for (int i = 1; i <= rm.getColumnCount(); i++) {
 					//结果集结构中获得字段名rm.getCatalogName(i)，i从1开始

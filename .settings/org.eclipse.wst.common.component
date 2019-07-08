@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="zscms">
+    <wb-module deploy-name="zzcms">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="zscms"/>
-        <property name="java-output-path" value="/zscms/build/classes"/>
+        <property name="java-output-path" value="/zzcms/build/classes"/>
+        <property name="context-root" value="zzcms"/>
     </wb-module>
 </project-modules>

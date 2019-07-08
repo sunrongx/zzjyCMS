@@ -2,12 +2,12 @@ package com.zs.zscms.tadvert.service;
 
 import java.util.List;
 
-import com.zs.zscms.exception.BusinessException;
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tadvert.bean.TadvertBean;
 import com.zs.zscms.tadvert.dao.impl.TadvertDao;
 import com.zs.zscms.tadvert.dao.impl.TadvertDaoImpl;
 import com.zs.zscms.user.bean.UserBean;
+import com.zz.cms.exception.BusinessException;
+import com.zz.cms.exception.SysException;
 
 public class TadvertService {
 	//采用多态形式创建TadvertDao对象

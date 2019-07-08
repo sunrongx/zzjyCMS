@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.zs.zscms.exception.BusinessException;
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.user.bean.UserBean;
 import com.zs.zscms.user.service.UserService;
 import com.zs.zscms.util.DBUtil;
+import com.zz.cms.exception.BusinessException;
+import com.zz.cms.exception.SysException;
 
 public class LoginServlet extends HttpServlet {
 	/**
@@ -45,9 +45,10 @@ public class LoginServlet extends HttpServlet {
 			//创建cookie，保存用户名和密码
 			Cookie cookie1 = new Cookie("username",username);
 			Cookie cookie2 = new Cookie("password",password);
-			//设置cookie时长
+			//设置cookie时长（秒）
 			cookie1.setMaxAge(600);
 			cookie2.setMaxAge(600);
+			
 			//响应给客户端
 			resp.addCookie(cookie1);
 			resp.addCookie(cookie2);

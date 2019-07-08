@@ -2,11 +2,11 @@ package com.zs.zscms.tchannel.service;
 
 import java.util.List;
 
-import com.zs.zscms.exception.BusinessException;
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tchannel.bean.TchannelBean;
 import com.zs.zscms.tchannel.dao.impl.TchannelDao;
 import com.zs.zscms.tchannel.dao.impl.TchannelDaoImpl;
+import com.zz.cms.exception.BusinessException;
+import com.zz.cms.exception.SysException;
 
 public class TchannelService {
 	//采用多态形式创建TchannelDao对象

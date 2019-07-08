@@ -2,9 +2,9 @@ package com.zs.zscms.tarticle.dao.impl;
 
 import java.util.List;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tarticle.bean.TarticleBean;
 import com.zs.zscms.user.bean.UserBean;
+import com.zz.cms.exception.SysException;
 
 public interface TarticleDao {
 	//一个map集合对应一个Tarticlebean

@@ -1,7 +1,11 @@
-package com.zs.zscms.exception;
+package com.zz.cms.exception;
 
 //异常信息
 public class AppException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//异常类型（自定义）
 	private int errCode;
 	//异常信息

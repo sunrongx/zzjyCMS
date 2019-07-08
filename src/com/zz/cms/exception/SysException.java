@@ -1,4 +1,4 @@
-package com.zs.zscms.exception;
+package com.zz.cms.exception;
 
 public class SysException extends Exception {
 	/**

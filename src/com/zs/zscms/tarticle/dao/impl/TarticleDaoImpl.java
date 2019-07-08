@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.tarticle.bean.TarticleBean;
 import com.zs.zscms.user.bean.UserBean;
 import com.zs.zscms.util.DBUtil;
+import com.zz.cms.exception.SysException;
 
 public class TarticleDaoImpl implements TarticleDao {
 	DBUtil db = new DBUtil();
@@ -22,27 +22,27 @@ public class TarticleDaoImpl implements TarticleDao {
 		//给SQL语句的参数赋值
 		Object [] obj = {tart.getTitle()};
 		//执行查询，返回结果
-		List<Map<String,String>> list = db.execQuery(sql,obj);
+		List<Map<String, Object>> list = db.execQuery(sql,obj);
 		//创建list集合来存储tart对象
 		List <TarticleBean> tarts = new ArrayList<TarticleBean> ();
 		//遍历集合，将map集合中的数据取出，然后直接封装到Tarticlebean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建TarticleBean对象
 			TarticleBean tartbean = new TarticleBean();
 			//根据key来取map集合的值
-			tartbean.setId(Integer.parseInt(map.get("id")));
-			tartbean.setTitle(map.get("title"));
-			tartbean.setContent(map.get("content"));
-			tartbean.setAuther(map.get("auther"));
-			tartbean.setCrtime(map.get("crtime"));
-			tartbean.setChannel(Integer.parseInt(map.get("channel")));
-			tartbean.setIsremod(Integer.parseInt(map.get("isremod")));
+			tartbean.setId(Integer.parseInt((String) map.get("id")));
+			tartbean.setTitle((String) map.get("title"));
+			tartbean.setContent((String) map.get("content"));
+			tartbean.setAuther((String) map.get("auther"));
+			tartbean.setCrtime((String) map.get("crtime"));
+			tartbean.setChannel(Integer.parseInt((String) map.get("channel")));
+			tartbean.setIsremod(Integer.parseInt((String) map.get("isremod")));
 			if(tartbean.getIsremod()==1){
 				tartbean.setStrIsremod("是");
 			}else{
 				tartbean.setStrIsremod("不是");
 			}
-			tartbean.setIshot(Integer.parseInt(map.get("ishot")));
+			tartbean.setIshot(Integer.parseInt((String) map.get("ishot")));
 			if(tartbean.getIshot()==1){
 				tartbean.setStrIshot("是");
 			}else{
@@ -63,27 +63,27 @@ public class TarticleDaoImpl implements TarticleDao {
 		//用三元运算符与sql语句拼串，结果相当于：select * from tarticle where 1=1 and id=?
 		//String sql="select * from tarticle where 1=1"+(TiaoJian==null?"":TiaoJian);
 		//创建listmap集合存储信息
-		List<Map<String,String>> list =db.execQuery(sql,obj);
+		List<Map<String, Object>> list =db.execQuery(sql,obj);
 		//创建集合来存储对象
 		List <TarticleBean> tarts = new ArrayList<TarticleBean>();
 		//遍历集合，将数据从map集合中取出然后直接封装到Tarticlebean中
-		for(Map<String,String> map:list){
+		for(Map<String, Object> map:list){
 			//创建TarticleBean对象
 			TarticleBean tartbean = new TarticleBean();
 			//根据key来取map集合的值
-			tartbean.setId(Integer.parseInt(map.get("id")));
-			tartbean.setTitle(map.get("title"));
-			tartbean.setContent(map.get("content"));
-			tartbean.setAuther(map.get("auther"));
-			tartbean.setCrtime(map.get("crtime"));
-			tartbean.setChannel(Integer.parseInt(map.get("channel")));
-			tartbean.setIsremod(Integer.parseInt(map.get("isremod")));
+			tartbean.setId(Integer.parseInt((String) map.get("id")));
+			tartbean.setTitle((String) map.get("title"));
+			tartbean.setContent((String) map.get("content"));
+			tartbean.setAuther((String) map.get("auther"));
+			tartbean.setCrtime((String) map.get("crtime"));
+			tartbean.setChannel(Integer.parseInt((String) map.get("channel")));
+			tartbean.setIsremod(Integer.parseInt((String) map.get("isremod")));
 			if(tartbean.getIsremod()==1){
 				tartbean.setStrIsremod("是");
 			}else{
 				tartbean.setStrIsremod("不是");
 			}
-			tartbean.setIshot(Integer.parseInt(map.get("ishot")));
+			tartbean.setIshot(Integer.parseInt((String) map.get("ishot")));
 			if(tartbean.getIshot()==1){
 				tartbean.setStrIshot("是");
 			}else{

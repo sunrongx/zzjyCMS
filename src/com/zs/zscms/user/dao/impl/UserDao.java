@@ -3,8 +3,8 @@ package com.zs.zscms.user.dao.impl;
 
 import java.util.List;
 
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.user.bean.UserBean;
+import com.zz.cms.exception.SysException;
 
 public interface UserDao {
 	//一个map集合对应一个userbean

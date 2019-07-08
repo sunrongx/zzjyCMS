@@ -2,11 +2,11 @@ package com.zs.zscms.user.service;
 
 import java.util.List;
 
-import com.zs.zscms.exception.BusinessException;
-import com.zs.zscms.exception.SysException;
 import com.zs.zscms.user.bean.UserBean;
 import com.zs.zscms.user.dao.impl.UserDao;
 import com.zs.zscms.user.dao.impl.UserDaoImpl;
+import com.zz.cms.exception.BusinessException;
+import com.zz.cms.exception.SysException;
 
 public class UserService {
 	//采用多态形式创建UserDao对象
