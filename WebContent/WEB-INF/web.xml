@@ -10,7 +10,7 @@
   
   <servlet>
     <servlet-name>login</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.LoginServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
@@ -20,7 +20,7 @@
 
   <servlet>
     <servlet-name>userlist</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.QueryUserListServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.QueryUserListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userlist</servlet-name>
@@ -28,7 +28,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>dept</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.DeptServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.DeptServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>dept</servlet-name>
@@ -36,7 +36,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userget</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.UserGetByIdServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.UserGetByIdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userget</servlet-name>
@@ -44,7 +44,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>useradd</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.UserAddServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.UserAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>useradd</servlet-name>
@@ -52,7 +52,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userupdate</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.UserUpdateServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.UserUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userupdate</servlet-name>
@@ -60,55 +60,55 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userdelete</servlet-name>
-    <servlet-class>com.zs.zscms.user.servlet.UserDeleteServlet</servlet-class>
+    <servlet-class>com.zz.cms.user.servlet.UserDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userdelete</servlet-name>
     <url-pattern>/userdelete.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>tadv</servlet-name>
-    <servlet-class>com.zs.zscms.tadvert.servlet.QueryTadvertServlet</servlet-class>
+    <servlet-name>tfas</servlet-name>
+    <servlet-class>com.zz.cms.tfastreport.servlet.QueryTfastreportServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>tadv</servlet-name>
-    <url-pattern>/tadv.do</url-pattern>
+    <servlet-name>tfas</servlet-name>
+    <url-pattern>/tfas.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>tadvget</servlet-name>
-    <servlet-class>com.zs.zscms.tadvert.servlet.TadvertGetByIdServlet</servlet-class>
+    <servlet-name>tfasget</servlet-name>
+    <servlet-class>com.zz.cms.tfastreport.servlet.TfastreportGetByIdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>tadvget</servlet-name>
-    <url-pattern>/tadvget.do</url-pattern>
+    <servlet-name>tfasget</servlet-name>
+    <url-pattern>/tfasget.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>tadvadd</servlet-name>
-    <servlet-class>com.zs.zscms.tadvert.servlet.TadvertAddServlet</servlet-class>
+    <servlet-name>tfasadd</servlet-name>
+    <servlet-class>com.zz.cms.tfastreport.servlet.TfastreportAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>tadvadd</servlet-name>
-    <url-pattern>/tadvadd.do</url-pattern>
+    <servlet-name>tfasadd</servlet-name>
+    <url-pattern>/tfasadd.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>tadvupdate</servlet-name>
-    <servlet-class>com.zs.zscms.tadvert.servlet.TadvertUpdateServlet</servlet-class>
+    <servlet-name>tfasupdate</servlet-name>
+    <servlet-class>com.zz.cms.tfastreport.servlet.TfastreportUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>tadvupdate</servlet-name>
-    <url-pattern>/tadvupdate.do</url-pattern>
+    <servlet-name>tfasupdate</servlet-name>
+    <url-pattern>/tfasupdate.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>tadvdelete</servlet-name>
-    <servlet-class>com.zs.zscms.tadvert.servlet.TadvertDeleteServlet</servlet-class>
+    <servlet-name>tfasdelete</servlet-name>
+    <servlet-class>com.zz.cms.tfastreport.servlet.TfastreportDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>tadvdelete</servlet-name>
-    <url-pattern>/tadvdelete.do</url-pattern>
+    <servlet-name>tfasdelete</servlet-name>
+    <url-pattern>/tfasdelete.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>tart</servlet-name>
-    <servlet-class>com.zs.zscms.tarticle.servlet.QueryTarticleServlet</servlet-class>
+    <servlet-class>com.zz.cms.tarticle.servlet.QueryTarticleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tart</servlet-name>
@@ -116,7 +116,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tartget</servlet-name>
-    <servlet-class>com.zs.zscms.tarticle.servlet.TarticleGetByIdServlet</servlet-class>
+    <servlet-class>com.zz.cms.tarticle.servlet.TarticleGetByIdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tartget</servlet-name>
@@ -124,7 +124,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tartadd</servlet-name>
-    <servlet-class>com.zs.zscms.tarticle.servlet.TarticleAddServlet</servlet-class>
+    <servlet-class>com.zz.cms.tarticle.servlet.TarticleAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tartadd</servlet-name>
@@ -132,7 +132,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tartupdate</servlet-name>
-    <servlet-class>com.zs.zscms.tarticle.servlet.TarticleUpdateServlet</servlet-class>
+    <servlet-class>com.zz.cms.tarticle.servlet.TarticleUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tartupdate</servlet-name>
@@ -140,7 +140,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tartdelete</servlet-name>
-    <servlet-class>com.zs.zscms.tarticle.servlet.TarticleDeleteServlet</servlet-class>
+    <servlet-class>com.zz.cms.tarticle.servlet.TarticleDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tartdelete</servlet-name>
@@ -148,7 +148,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tcha</servlet-name>
-    <servlet-class>com.zs.zscms.tchannel.servlet.TchannelServlet</servlet-class>
+    <servlet-class>com.zz.cms.tchannel.servlet.TchannelServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tcha</servlet-name>
@@ -156,7 +156,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tchaget</servlet-name>
-    <servlet-class>com.zs.zscms.tchannel.servlet.TchannelGetByIdServlet</servlet-class>
+    <servlet-class>com.zz.cms.tchannel.servlet.TchannelGetByIdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tchaget</servlet-name>
@@ -164,7 +164,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tchaadd</servlet-name>
-    <servlet-class>com.zs.zscms.tchannel.servlet.TchannelAddServlet</servlet-class>
+    <servlet-class>com.zz.cms.tchannel.servlet.TchannelAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tchaadd</servlet-name>
@@ -172,7 +172,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tchaupdate</servlet-name>
-    <servlet-class>com.zs.zscms.tchannel.servlet.TchannelUpdateServlet</servlet-class>
+    <servlet-class>com.zz.cms.tchannel.servlet.TchannelUpdateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tchaupdate</servlet-name>
@@ -180,7 +180,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>tchadelete</servlet-name>
-    <servlet-class>com.zs.zscms.tchannel.servlet.TchannelDeleteServlet</servlet-class>
+    <servlet-class>com.zz.cms.tchannel.servlet.TchannelDeleteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>tchadelete</servlet-name>
@@ -190,7 +190,7 @@
 
   <filter>
     <filter-name>filter</filter-name>
-    <filter-class>com.zs.zscms.filter.FilterDemo</filter-class>
+    <filter-class>com.zz.cms.filter.FilterDemo</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>filter</filter-name>

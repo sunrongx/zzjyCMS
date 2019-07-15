@@ -172,7 +172,7 @@ H1 a {
 							<!-- 点击用户管理超链接时(在left.html中)应该跳转到后台
 							UserListServlet中,并将当前默认页数(第一页)参数携带到后台 -->
 							
-							<li><a href="userlist.do?currentPage=1" target="mainFrame">用户管理</a></li>
+							<li><a href="userlist.do?Page=1" target="mainFrame">用户管理</a></li>
 
 
 
@@ -216,7 +216,7 @@ H1 a {
 
 							<li><a href="tart.do" target="mainFrame">文章管理</a></li>
 
-							<li><a href="tadv.do" target="mainFrame">快报管理</a></li>
+							<li><a href="tfas.do" target="mainFrame">快报管理</a></li>
 
 
 						</ul>

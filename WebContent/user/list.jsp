@@ -21,20 +21,49 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>User-list</title>
+<script type="text/javascript">
+
+function del(){
+ var con=confirm("是否删除该用户");
+ if (con) {
+	return true;
+} else {
+return false;
+}
+}
+$(function(){
+	$("#zxc").click(function(){
+		var likeName=$("#likeName").val();
+	
+		location.href="userlist.do?name="+likeName;
+	});
+	
+});
+//文档加载
+$(function(){
+//当选取表头一行的复选框时 下面的全部选中
+$("#ids").click(function(){
+	$(":checkbox").prop("checked",this.checked);
+})
+})
+
+//onclick="javascript:window.location.href='userlist.do'"
+</script>
 </head>
 <body>
 <div class="box-positon">
-	<div class="rpos">当前位置: 用户管理 - 列表  </div>
+	<div class="rpos">当前位置: 用户管理 - 列表</div>
 	<form class="ropt">
-		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='dept.do'"/>
+	<div  class="clear">
+	<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="模糊查询......."/>
+	<input type="button" value="查询" id="zxc" />
+	 <input class="add" type="button" value="添加" onclick="javascript:window.location.href='dept.do'"/>
 	</form>
-	<div class="clear">
-		
-	</div>
+	<div class="clear"></div>
 </div>
 <div class="body-box">
 <input type="hidden" name="pageNo" value=""/>
-<form method="post" id="tableForm">
+<form method="post" id="tableForm"  action="userdelete.do">
 <input type="hidden" value="" name="pageNo"/>
 <input type="hidden" value="" name="queryName"/>
 <table cellspacing="1" cellpadding="0" border="0" width="100%" class="pn-ltable">
@@ -55,7 +84,7 @@
 	<tbody class="pn-ltbody">
 		<c:forEach items="${users }" var="user">
 			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-			<td><input type="checkbox" name="ids" value="73"/></td>
+			<td><input type="checkbox" name="ids" value="${user.id }"/></td>
 			<td align="center">${user.id }</td>
 			<td align="center">${user.loginname }</td>
 			<td align="center">${user.realname }</td>
@@ -65,18 +94,40 @@
 			<td align="center">${user.deptname }</td>
 			<td align="center">${user.enabledTxt }</td>
 			<td align="center">
-			<a href="userget.do?id=${ user.id } " class="pn-opt">修改</a>
-			<a href="userdelete.do?id=${ user.id } " class="pn-opt">删除</a>
+			<a href="userget.do?id=${user.id } " class="pn-opt">修改</a>
+			<a href="userdelete.do?id=${user.id }"  onclick="return del()" class="pn-opt">删除</a>
 			</td>
 		</tr>
 		</c:forEach>
 	</tbody>
 </table>
+<div class="page pb15" >
+<input class="del-button" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+</div>
+<div class="page pb15"  style="float:right;">
+<span class="r inb_a page_b">
+		<!-- [当前页/尾页] -->
+		[${requestScope.currentPage }/${requestScope.pageCount }]
+		<a href="userlist.do?currentPage=1&&name=${name }">首页</a>
+		<c:if test="${requestScope.currentPage-1>0 }">
+			<a href="userlist.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}">上一页</a>
+		</c:if>
+		<c:if test="${requestScope.currentPage+1<=requestScope.pageCount }">
+			<a href="userlist.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}">下一页</a>
+		</c:if>
+		<a href="userlist.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}">尾页</a>
+	</span>
+</div>
+
+
 <div style="margin-top:15px;">
 <!-- 	<input class="del-button" type="button" value="取消" onclick="optCancel();"/>
 	<input class="submit" type="button" value="通过" onclick="optPass();"/> -->
 </div>
 </form>
+<div class="page pb15"  style="float:right;margin:-15px 30px 0 0" >
+	<form action="userlist.do?currentPage=${requestScope.currentPage}">转到第<input type="text" width="10px" name="currentPage"/>页<input type="submit" value="确定"/></form>
+</div>
 </div>
 </body>
 </html>

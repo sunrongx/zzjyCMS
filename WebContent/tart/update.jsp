@@ -64,7 +64,7 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						添加日期:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="crtime" maxlength="80"  value=" ${ tart.crtime } "  />
+						<input type="text" class="required" name="ctime" maxlength="80"  value=" ${ tart.ctime } "  />
 					</td>
 				</tr>
 				<tr>

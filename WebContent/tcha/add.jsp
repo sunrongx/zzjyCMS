@@ -68,11 +68,17 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						是否叶子:</td><td width="80%" class="pn-fcontent">
-						<input type="radio" name="leaf" value="1" checked="checked"/>是
-						<input type="radio" name="leaf" value="2"/>不是
+						<input type="radio" name="isleaf" value="1" checked="checked"/>是
+						<input type="radio" name="isleaf" value="2"/>不是
 					</td>
 				</tr>
-				
+				<tr>
+					<td width="20%" class="pn-flabel pn-flabel-h">
+						顺序:</td><td width="80%" class="pn-fcontent">
+						<input type="radio" name="sort" value="1" checked="checked"/>一
+						<input type="radio" name="sort" value="2"/>二
+					</td>
+				</tr>
 				
 				
 			</tbody>

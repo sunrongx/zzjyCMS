@@ -87,7 +87,7 @@
 						部门:</td><td width="80%" class="pn-fcontent">
 						<select name="dept">
 							<c:forEach items="${depts}" var="dept">
-								<option value="${dept.id}" >${dept.deptname}</option>
+								<option value="${dept.id}">${dept.deptname}</option>
 							</c:forEach>
 					</select>
 					</td>

@@ -68,7 +68,7 @@
 						<td width="20%" class="pn-flabel pn-flabel-h"><span
 							class="pn-frequired">*</span> 日期:</td>
 						<td width="80%" class="pn-fcontent"><input type="text"
-							class="required" name="crtime" maxlength="100" /></td>
+							class="required" name="ctime" maxlength="100" /></td>
 					</tr>
 					<tr>
 						<td width="20%" class="pn-flabel pn-flabel-h"><span
