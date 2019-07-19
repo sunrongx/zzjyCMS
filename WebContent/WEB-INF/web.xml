@@ -170,6 +170,16 @@
     <servlet-name>tchaadd</servlet-name>
     <url-pattern>/tchaadd.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>tchaaddget</servlet-name>
+  	<servlet-class>com.zz.cms.tchannel.servlet.TchannelGetAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>tchaaddget</servlet-name>
+  	<url-pattern>/tchaaddget.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>tchaupdate</servlet-name>
     <servlet-class>com.zz.cms.tchannel.servlet.TchannelUpdateServlet</servlet-class>
@@ -197,7 +207,14 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
-
+  <filter>
+    <filter-name>urlfilter</filter-name>
+    <filter-class>com.zz.cms.filter.URLFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>urlfilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   
   
   

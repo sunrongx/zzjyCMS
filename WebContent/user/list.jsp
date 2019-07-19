@@ -24,12 +24,12 @@
 <script type="text/javascript">
 
 function del(){
- var con=confirm("是否删除该用户");
- if (con) {
-	return true;
-} else {
-return false;
-}
+ 	var con=confirm("是否删除该用户");
+ 	if (con) {
+		return true;
+	} else {
+		return false;
+	}
 }
 $(function(){
 	$("#zxc").click(function(){
@@ -46,6 +46,14 @@ $("#ids").click(function(){
 	$(":checkbox").prop("checked",this.checked);
 })
 })
+
+
+function delAll(){
+	var ids = document.getElementsByName("ids").value;
+	
+	return ids;
+	
+}
 
 //onclick="javascript:window.location.href='userlist.do'"
 </script>
@@ -84,7 +92,7 @@ $("#ids").click(function(){
 	<tbody class="pn-ltbody">
 		<c:forEach items="${users }" var="user">
 			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
-			<td><input type="checkbox" name="ids" value="${user.id }"/></td>
+			<td><input id="ids" type="checkbox" name="ids" value="${user.id }"/></td>
 			<td align="center">${user.id }</td>
 			<td align="center">${user.loginname }</td>
 			<td align="center">${user.realname }</td>
@@ -102,7 +110,8 @@ $("#ids").click(function(){
 	</tbody>
 </table>
 <div class="page pb15" >
-<input class="del-button" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+
+<input action="userdelete.do?ids=delAll()" class="del-button" name="${user.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
 </div>
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">

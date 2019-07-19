@@ -40,7 +40,7 @@ a.pn-opt:active {color: #2366A8;}
 .pn-tree-checkbox{vertical-align:middle;}
 
 /*按钮的样式*/
-.del-button{background:url(../img/theme/del-button.png) no-repeat; width:59px; height:24px; text-indent:18px; color:#676666; border:0 none; cursor:pointer;}
+.del-button{background:url(../img/theme/del-button.png) no-repeat; width:129px; height:24px; text-indent:18px; color:#676666; border:0 none; cursor:pointer;}
 .save-order{background:url(../img/theme/save-button.png) no-repeat; width:106px; height:24px; border:0 none;text-indent:18px; color:#676666; cursor:pointer;}
 .save-field{background:url(../img/theme/save-button.png) no-repeat; width:125px; height:24px; border:0 none;text-indent:20px; color:#676666; cursor:pointer;}
 .save-content{background:url(../img/theme/save-button.png) no-repeat; width:106px; height:24px; border:0 none;text-indent:20px; color:#676666; cursor:pointer;}

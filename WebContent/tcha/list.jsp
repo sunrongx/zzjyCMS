@@ -25,7 +25,7 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 栏目管理 - 列表  </div>
 	<form class="ropt">
-		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='tcha/add.jsp'"/>
+		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='tchaaddget.do'"/>
 	</form>
 	<div class="clear">
 		

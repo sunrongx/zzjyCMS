@@ -26,7 +26,7 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 栏目管理 - 修改</div>
 	<form class="ropt">
-		<input type="submit" onclick="this.form.action='tchaupdate.do';" value="返回列表" class="return-button"/>
+		<input type="submit" onclick="this.form.action='tcha.do ';" value="返回列表" class="return-button"/>
 	</form>
 	<div class="clear"></div>
 </div>
@@ -34,12 +34,12 @@
 	<form id="jvForm" action="tchaupdate.do?id=${tcha.id }" method="post">
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
-				<%-- <tr>
+				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired"></span>
 						<span class="pn-frequired">  ${ msg } </span>
 					</td>
-				</tr> --%>
+				</tr> 
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
@@ -47,16 +47,30 @@
 						<input type="text" class="required" name="cname" maxlength="100"     value="${ tcha.cname } "  />
 					</td>
 				</tr>	
-				<tr>
+			
+<%-- 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						上级栏目:</td><td width="80%" class="pn-fcontent">
 						<input type="text" class="required" name="pid" maxlength="100"  value="${ tcha.pid } "   />
 					</td>
 				</tr>
+--%>
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
+						上级栏目:</td><td width="80%" class="pn-fcontent">
+					<select name="pid">
+							
+							<c:forEach items="${tchas}" var="tcha">
+								<option value=" ${tcha.id}" >${tcha.id}</option>
+							</c:forEach>
+							
+					</select>
+					</td>
+				</tr>
+ 				<tr>
+					<td width="20%" class="pn-flabel pn-flabel-h">
 						栏目级别:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="lev" maxlength="100"  value="${ tcha.lev } "   />
+						<input type="text" class="required" name="lev" maxlength="100"  value="${ tcha.lev } " />
 					</td>
 				</tr>
 				<tr>
@@ -65,7 +79,12 @@
 						<input type="text" class="required" name="isleaf" maxlength="100"  value="${ tcha.isleaf } "   />
 					</td>
 				</tr>
-				
+				<tr>
+					<td width="20%" class="pn-flabel pn-flabel-h">
+						栏目顺序:</td><td width="80%" class="pn-fcontent">
+						<input type="text" class="required" name="sort" maxlength="100"  value="${ tcha.sort } "   />
+					</td>
+				</tr>
 				
 				
 				

@@ -4,20 +4,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link href="../res/lecheng/css/admin.css" rel="stylesheet" type="text/css"/>
-<link href="../res/common/css/theme.css" rel="stylesheet" type="text/css"/>
-<link href="../res/common/css/jquery.validate.css" rel="stylesheet" type="text/css"/>
-<link href="../res/common/css/jquery.treeview.css" rel="stylesheet" type="text/css"/>
-<link href="../res/common/css/jquery.ui.css" rel="stylesheet" type="text/css"/>
+<link href="res/lecheng/css/admin.css" rel="stylesheet" type="text/css"/>
+<link href="res/common/css/theme.css" rel="stylesheet" type="text/css"/>
+<link href="res/common/css/jquery.validate.css" rel="stylesheet" type="text/css"/>
+<link href="res/common/css/jquery.treeview.css" rel="stylesheet" type="text/css"/>
+<link href="res/common/css/jquery.ui.css" rel="stylesheet" type="text/css"/>
 
 <!-- <script src="/thirdparty/ckeditor/ckeditor.js" type="text/javascript"></script> -->
 <!-- <script src="/thirdparty/My97DatePicker/WdatePicker.js" type="text/javascript"></script> -->
 <script type="text/javascript" src="res/fckeditor/fckeditor.js"></script>
-<script src="../res/common/js/jquery.js" type="text/javascript"></script>
-<script src="../res/common/js/jquery.ext.js" type="text/javascript"></script>
-<script src="../res/common/js/jquery.form.js" type="text/javascript"></script>
-<script src="../res/common/js/lecheng.js" type="text/javascript"></script>
-<script src="../res/lecheng/js/admin.js" type="text/javascript"></script>
+<script src="res/common/js/jquery.js" type="text/javascript"></script>
+<script src="res/common/js/jquery.ext.js" type="text/javascript"></script>
+<script src="res/common/js/jquery.form.js" type="text/javascript"></script>
+<script src="res/common/js/lecheng.js" type="text/javascript"></script>
+<script src="res/lecheng/js/admin.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="res/css/style.css" />
 <title>栏目添加</title>
@@ -26,12 +26,12 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 栏目管理 - 添加</div>
 	<form class="ropt">
-		<input type="submit" onclick="this.form.action='../tcha.do';" value="返回列表" class="return-button"/>
+		<input type="submit" onclick="this.form.action='tcha.do';" value="返回列表" class="return-button"/>
 	</form>
 	<div class="clear"></div>
 </div>
 <div class="body-box" style="float:right">
-	<form id="jvForm" action="../tchaadd.do" method="post">
+	<form id="jvForm" action="tchaadd.do" method="post">
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
 				<tr>
@@ -50,10 +50,12 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						上级栏目:</td><td width="80%" class="pn-fcontent">
-					<select name="tcha">
+					<select name="pid">
+							
 							<c:forEach items="${tchas}" var="tcha">
-								<option value="${tcha.cname}" >${tcha.cname}</option>
+								<option value=" ${tcha.id}" >${tcha.id}</option>
 							</c:forEach>
+							
 					</select>
 					</td>
 				</tr>
@@ -77,6 +79,8 @@
 						顺序:</td><td width="80%" class="pn-fcontent">
 						<input type="radio" name="sort" value="1" checked="checked"/>一
 						<input type="radio" name="sort" value="2"/>二
+						<input type="radio" name="sort" value="3"/>三
+						
 					</td>
 				</tr>
 				
@@ -92,5 +96,8 @@
 		</table>
 	</form>
 </div>
+
+
+
 </body>
 </html>
