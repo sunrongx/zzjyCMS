@@ -61,18 +61,28 @@
 						<input type="text" class="required" name="auther" maxlength="80"  value=" ${ tart.auther } "  />
 					</td>
 				</tr>
-				<tr>
+<%-- 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
-						添加日期:</td><td width="80%" class="pn-fcontent">
+						修改日期:</td><td width="80%" class="pn-fcontent">
 						<input type="text" class="required" name="ctime" maxlength="80"  value=" ${ tart.ctime } "  />
 					</td>
 				</tr>
+ --%>				
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						所属栏目:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="channel" maxlength="80"  value=" ${ tart.strChannel } "  />
+						<select name="channel">
+							<option value="0" >无所属栏目</option>
+							<c:forEach items="${chas}" var="cha">
+								<%-- <c:if test="${tcha.pid!=0}"><option value=" ${tcha.id}" >${tcha.cname}</option></c:if> --%>
+								<option value=" ${cha.id}" >${cha.cname}</option>
+							</c:forEach>
+							
+						</select>
+						<%-- <input type="text" class="required" name="channel" maxlength="80"  value=" ${ tart.strChannel } "  /> --%>
 					</td>
 				</tr>
+				
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						是否推荐:</td><td width="80%" class="pn-fcontent">

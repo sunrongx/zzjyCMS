@@ -43,17 +43,23 @@ $(function(){
 $(function(){
 //当选取表头一行的复选框时 下面的全部选中
 $("#ids").click(function(){
-	$(":checkbox").prop("checked",this.checked);
+	var eles = $(":checkbox").prop("checked",this.checked);
+	$.each(eles,function(){
+		var ids = $(this).val();	//这里即获取到多选框选中的值的数组，使用.length属性可获取数组长度
+		alert(ids);
+		$.get("Servlet",{info:ids});
+	});
+
 })
 })
 
 
-function delAll(){
+/* function delAll(){
 	var ids = document.getElementsByName("ids").value;
 	
 	return ids;
 	
-}
+} */
 
 //onclick="javascript:window.location.href='userlist.do'"
 </script>
@@ -111,7 +117,7 @@ function delAll(){
 </table>
 <div class="page pb15" >
 
-<input action="userdelete.do?ids=delAll()" class="del-button" name="${user.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+<input action="userdelete.do" id="ids" class="del-button" name="${user.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
 </div>
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">

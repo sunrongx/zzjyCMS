@@ -26,7 +26,7 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 文章管理 - 列表  </div>
 	<form class="ropt">
-		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='tart/add.jsp'"/>
+		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='channel.do'"/>
 	</form>
 	<div class="clear">
 		
@@ -45,6 +45,7 @@
 			<th>文章名</th>
 			<th>文章内容</th>
 			<th>文章作者</th>
+			<th>创建时间</th>
 			<th>所属栏目</th>
 			<th>是否推荐</th>
 			<th>是否热点</th>
@@ -59,7 +60,9 @@
 			<td align="center">${tart.title }</td>
 			<td align="center">${tart.content }</td>
 			<td align="center">${tart.auther }</td>
-			<td align="center">${tart.channel }</td>
+			<td align="center">${tart.ctime }</td>
+			<%-- <td align="center">${tart.channel }</td> --%>
+			<td align="center">${tart.strChannel }</td>
 			<td align="center">${tart.strIsremod }</td>
 			<td align="center">${tart.strIshot }</td>
 			<td align="center">

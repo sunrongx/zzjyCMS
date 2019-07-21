@@ -51,9 +51,10 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						上级栏目:</td><td width="80%" class="pn-fcontent">
 					<select name="pid">
-							
+							<option value="0" >-无上级栏目-</option>
 							<c:forEach items="${tchas}" var="tcha">
-								<option value=" ${tcha.id}" >${tcha.id}</option>
+								<%-- <c:if test="${tcha.pid!=0}"><option value=" ${tcha.pid}" >${tcha.cname}</option></c:if> --%>
+								<option value=" ${tcha.id}" >${tcha.cname}</option>
 							</c:forEach>
 							
 					</select>

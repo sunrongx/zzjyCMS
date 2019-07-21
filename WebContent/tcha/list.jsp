@@ -54,7 +54,7 @@
 			<td><input type="checkbox" name="ids" value="73"/></td>
 			<td align="center">${tcha.id }</td>
 			<td align="center">${tcha.cname }</td>
-			<td align="center">${tcha.pid }</td>
+			<td align="center">${tcha.pname }</td>
 			<td align="center">${tcha.strlev }</td>
 			<td align="center">${tcha.strIsleaf }</td>
 			<td align="center">
