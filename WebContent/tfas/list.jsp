@@ -20,23 +20,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>tart-list</title>
+<title>Tfas-list</title>
 </head>
 <body>
 <script type="text/javascript">
 	function del(){
-	 	var con=confirm("是否删除该文章");
+	 	var con=confirm("是否删除该广告");
 	 	if (con) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
 	$(function(){
 		$("#zxc").click(function(){
 			var likeName=$("#likeName").val();
 		
-			location.href="tart.do?name="+likeName;
+			location.href="tfas.do?name="+likeName;
 		});
 		
 	});
@@ -44,13 +45,12 @@
 
 
 
-
 <div class="box-positon">
-	<div class="rpos">当前位置: 文章管理 - 列表  </div>
+	<div class="rpos">当前位置: 广告管理 - 列表  </div>
 	<form class="ropt">
 		<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="模糊查询......."/>
 		<input type="button" value="查询" id="zxc" />
-		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='channel.do'"/>
+		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='tfas/add.jsp'"/>
 	</form>
 	<div class="clear">
 		
@@ -65,34 +65,29 @@
 	<thead class="pn-lthead">
 		<tr>
 			<th width="20"><input type="checkbox" onclick="Pn.checkbox('ids',this.checked)"/></th>
-			<th>文章编号</th>
-			<th>文章名</th>
-			<th style="width:300px;">文章内容</th>
-			<th>文章作者</th>
+			<th>广告编号</th>
+			<th>广告名</th>
+			<th>广告内容</th>
 			<th>创建时间</th>
-			<th>所属栏目</th>
-			<th>是否推荐</th>
-			<th>是否热点</th>
+<!-- 		<th>创建人</th> 
+-->
 			<th>操作选项</th>
 		</tr>
 	</thead>
 	<tbody class="pn-ltbody">
-		<c:forEach items="${tarts }" var="tart">
-			
+		<c:forEach items="${tfass }" var="tfas">
 			<tr bgcolor="#ffffff" onmouseover="this.bgColor='#eeeeee'" onmouseout="this.bgColor='#ffffff'">
 			<td><input type="checkbox" name="ids" value="73"/></td>
-			<td align="center">${tart.id }</td>
-			<td align="center">${tart.title }</td>
-			<td><textarea style="font-size:18px;width:300px;margin:0 -200px 0 0;resize:vertical;">${tart.content }</textarea></td>
-			<td align="center">${tart.auther }</td>
-			<td align="center">${tart.ctime }</td>
-			<%-- <td align="center">${tart.channel }</td> --%>
-			<td align="center">${tart.strChannel }</td>
-			<td align="center">${tart.strIsremod }</td>
-			<td align="center">${tart.strIshot }</td>
+			<td align="center">${tfas.id }</td>
+			<td align="center">${tfas.title }</td>
+			<td align="center" >${tfas.content }</td>
+			
+			<td align="center">${tfas.ctime }</td>
+<%-- 		<td align="center">${tfas.crman }</td> 
+--%>
 			<td align="center">
-			<a href="tartget.do?id=${ tart.id } " class="pn-opt">修改</a>
-			<a href="tartdelete.do?id=${ tart.id } " onclick="return del()" class="pn-opt">删除</a>
+			<a href="tfasget.do?id=${ tfas.id } " class="pn-opt">修改</a>
+			<a href="tfasdelete.do?id=${ tfas.id } " onclick="return del()" class="pn-opt">删除</a>
 			</td>
 		</tr>
 		</c:forEach>
@@ -101,21 +96,21 @@
 
 <div class="page pb15" >
 
-<input action="tartdelete.do" id="ids" class="del-button" name="${tart.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+<input action="tfasdelete.do" id="ids" class="del-button" name="${tfas.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
 </div>
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->
 		
 		[${requestScope.currentPage }/${requestScope.pageCount }]
-		<a href="tart.do?currentPage=1&&name=${name }">首页</a>
+		<a href="tfas.do?currentPage=1&&name=${name }">首页</a>
 		<c:if test="${requestScope.currentPage-1>0 }">
-			<a href="tart.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}">上一页</a>
+			<a href="tfas.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}">上一页</a>
 		</c:if>
 		<c:if test="${requestScope.currentPage+1<=requestScope.pageCount }">
-			<a href="tart.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}">下一页</a>
+			<a href="tfas.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}">下一页</a>
 		</c:if>
-		<a href="tart.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}">尾页</a>
+		<a href="tfas.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}">尾页</a>
 	</span>
 </div>
 

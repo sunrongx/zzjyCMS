@@ -22,9 +22,31 @@
 <title>栏目列表</title>
 </head>
 <body>
+
+<script type="text/javascript">
+	function del(){
+	 	var con=confirm("是否删除该栏目");
+	 	if (con) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	$(function(){
+		$("#zxc").click(function(){
+			var likeName=$("#likeName").val();
+		
+			location.href="tcha.do?name="+likeName;
+		});
+		
+	});
+</script>
+
 <div class="box-positon">
 	<div class="rpos">当前位置: 栏目管理 - 列表  </div>
 	<form class="ropt">
+		<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="模糊查询......."/>
+		<input type="button" value="查询" id="zxc" />
 		<input class="add" type="button" value="添加" onclick="javascript:window.location.href='tchaaddget.do'"/>
 	</form>
 	<div class="clear">
@@ -59,12 +81,31 @@
 			<td align="center">${tcha.strIsleaf }</td>
 			<td align="center">
 			<a href="tchaget.do?id=${ tcha.id } " class="pn-opt">修改</a>
-			<a href="tchadelete.do?id=${ tcha.id } " class="pn-opt">删除</a>
+			<a href="tchadelete.do?id=${ tcha.id } " onclick="return del()" class="pn-opt">删除</a>
 			</td>
 		</tr>
 		</c:forEach>
 	</tbody>
 </table>
+<div class="page pb15" >
+
+	<input action="tchadelete.do" id="ids" class="del-button" name="${tcha.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+</div>
+<div class="page pb15"  style="float:right;">
+<span class="r inb_a page_b">
+		<!-- [当前页/尾页] -->
+		
+		[${requestScope.currentPage }/${requestScope.pageCount }]
+		<a href="tcha.do?currentPage=1&&name=${name }">首页</a>
+		<c:if test="${requestScope.currentPage-1>0 }">
+			<a href="tcha.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}">上一页</a>
+		</c:if>
+		<c:if test="${requestScope.currentPage+1<=requestScope.pageCount }">
+			<a href="tcha.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}">下一页</a>
+		</c:if>
+		<a href="tcha.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}">尾页</a>
+	</span>
+</div>
 <div style="margin-top:15px;">
 <!-- 	<input class="del-button" type="button" value="取消" onclick="optCancel();"/>
 	<input class="submit" type="button" value="通过" onclick="optPass();"/> -->

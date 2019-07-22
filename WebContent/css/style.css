@@ -1,0 +1,109 @@
+button {
+	border: 0;
+	box-sizing: border-box;
+	width: 420px;
+	height: 50px;
+	border-radius: 10px;
+	background: linear-gradient(to right, red, orange, yellow, green, blue, darkblue, indigo);
+	box-shadow: 10px 0 30px #FFF;
+	letter-spacing: 10px;
+	font-size: 24px;
+	color: #FFF;
+	text-align: center;
+	line-height: 50px;
+	margin: 0 auto;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+button:hover {
+	opacity: 0.6;
+}
+
+input:hover {
+	opacity: 0.6;
+}
+
+div>input {
+	width: 400px;
+	height: 50px;
+	border-radius: 10px;
+	margin: 20px 0;
+	padding-left: 10px;
+	font-size: 30px;
+
+}
+
+div>input:focus {
+	background: #BFA;
+	opacity: 0.6;
+}
+
+div>input:focus::placeholder {
+	/* color: #ADFF2F; */
+	color: #CCCCCC;
+	font-size: 30px;
+}
+
+div>input::placeholder {
+	font-size: 30px;
+}
+
+fieldset {
+	font-size: 30px;
+	border: 3px double #000;
+	padding: 20px;
+	/* background: url(images/知之教育.jpg); */
+	/* -webkit-background-size: cover; */
+	/* background-size: cover; */
+}
+
+.box {
+	width: 500px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100px;
+	bottom: 0;
+	margin: auto;
+}
+
+.code {
+	width: 200px;
+}
+
+.code+canvas {
+	position: relative;
+	top: 25px;
+}
+
+.error {
+	position: absolute;
+	left: 40px;
+	top: 40px;
+	font-size: 20px;
+	color: red;
+}
+
+input[type="checkbox"] {
+	width: 24px;
+	height: 24px;
+}
+
+label {
+	color: #BFA;
+}
+
+input[type="checkbox"]:checked+label {
+	color: red;
+}
+
+.rmb {
+	margin-bottom: 10px;
+}
+
+label:hover {
+	color: blue;
+}
+
+.
