@@ -14,7 +14,17 @@ import com.zz.cms.tchannel.bean.TchannelBean;
 import com.zz.cms.user.bean.UserBean;
 import com.zz.cms.user.service.UserService;
 
+/**
+ * 查询servlet
+ * @author Administrator
+ *
+ */
 public class QueryTarticleServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8300273917562105621L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		TarticleService tas = new TarticleService();
@@ -27,23 +37,29 @@ public class QueryTarticleServlet extends HttpServlet {
 		int pageCount = tas.queryPageCounts(size);
 		// 获取当前的页数
 		String p = req.getParameter("currentPage");
+		//初始化页数为1
 		int page = 1;
 		try {
+			//将当前页数赋值给页数
 			page = Integer.parseInt(p);
+			//判断输入的页数是否符合规则
 			if (page > pageCount) {
+				//超过总页数定义为1
 				page = 1;
 			}
 		} catch (Exception e) {
+			//输入乱七八糟的东西全定义为1
 			page = 1;
 		}
 		
-		// 模糊查询搜索没有值时，默认为空字符串
+		// 模糊查询搜索没有值时，默认为空字符串，拼到sql里查询所有
 		if (name == null || name.equals(" ")) {
 			name = "";
 		}
+		//分页查询文章
 		List<TarticleBean> tarts = tas.queryByPage(name, page, size);
-		// 获取总页数
 		// req.setAttribute("page", page);
+		//塞入信息作为参数
 		req.setAttribute("p", p);
 		req.setAttribute("currentPage", page);
 		req.setAttribute("pageCount", pageCount);

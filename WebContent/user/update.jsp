@@ -45,14 +45,19 @@
 		//获取span元素
 		//var spanEle=document.getElementById("spanlogin");
 		//使用test()方法验证是否符合条件
-		if(CHKLOGINNAME.test($("#loginname").val())){
+		var loginname = $("#loginname").val();
+		if(CHKLOGINNAME.test(loginname)){
 			//给页面提示验证成功
 			//spanEle.innerHTML="√";
-			$("#spanlogin").html("√");
+			//$("#spanlogin").html("√");
 			//spanEle.style.color="green";
-			$("#spanlogin").css("color","green");
-			return true;
-		}
+			//$("#spanlogin").css("color","green");
+			if(chkExistLoginname(loginname)){
+				return true;
+			}else{
+				return false;
+			}
+		}	//return true;
 		else {
 			//如果错误要告诉错误原因
 			//spanEle.innerHTML="登录名不能以数字开头，长度在6-16位之间";
@@ -76,7 +81,7 @@
 		//获取span元素
 		//var spanEle=document.getElementById("spanpwd");
 		//使用test()方法验证是否符合条件
-		if(CHKPASSWORD.test($("#password").val())){
+		if(CHKPASSWORD.test($("#password").val().trim())){
 			//给页面提示验证成功
 			//spanEle.innerHTML="√";
 			$("#spanpwd").html("√")
@@ -109,13 +114,19 @@
 		//获取span元素
 		//var spanEle=document.getElementById("spaneml");
 		//使用test()方法验证是否符合条件
-		if(CHKEMAIL.test($("#email").val())){
+		var email = $("#email").val();
+		if(CHKEMAIL.test(email)){
 			//给页面提示验证成功
 			//spanEle.innerHTML="√";
-			$("#spaneml").html("√");
+			//$("#spaneml").html("√");
 			//spanEle.style.color="green";
-			$("#spaneml").css("color","green");
-			return true;
+			//$("#spaneml").css("color","green");
+			if(chkExistEmail(email)){
+				return true;
+			}else{
+				return false;
+			}
+			//return true;
 		}
 		else {
 			//如果错误要告诉错误原因
@@ -140,7 +151,7 @@
 		//var spanEle=document.getElementById("spanrepwd");
 		
 		//2.进行匹配
-		if($("#repwd").val()!=null&&($("#repwd").val()!="")&&($("#password").val()==$("#repwd").val())){
+		if($("#repwd").val()!=null&&($("#repwd").val().trim()!="")&&($("#password").val().trim()==$("#repwd").val().trim())){
 			//spanEle.innerHTML="√";
 			$("#spanrepwd").html("√");
 			//spanEle.style.color="green";
@@ -166,7 +177,7 @@
 		//var spanEle=document.getElementById("spanreal");
 		
 		//2.进行匹配
-		if(CHKREALNAME.test($("#realname").val())){
+		if(CHKREALNAME.test($("#realname").val().trim())){
 			//spanEle.innerHTML="√";
 			$("#spanreal").html("√");
 			//spanEle.style.color="green";
@@ -182,6 +193,70 @@
 			return false;
 		}
 
+	}
+	
+	//验证用户名是否重复
+	function chkExistLoginname(loginname){
+		//定义boolean类型返回值，默认false
+		var chk1 = false;
+		$.ajax({
+			url:"chkuser.do",
+			type:"post",
+			data:"type=1&loginname="+loginname,
+			async:false,
+			dataType:"text",
+			success:function(flag){
+				//如果返回true表示未重复
+				if(flag=="true"){
+					$("#spanlogin").html("√");
+					$("#spanlogin").css("color","green");
+					chk1=true;
+				}else{
+					//重复时
+					$("#spanlogin").html("用户名已存在");
+					$("#spanlogin").css("color","red");
+					chk1=false;
+				}
+			},
+			error:function(){
+				$("#spanlogin").html("请求数据失败，请联系管理员");
+				$("#spanlogin").css("color","red");
+			}
+			
+		});
+		return chk1;
+	}
+
+	//验证邮箱是否重复
+	function chkExistEmail(email){
+		//定义boolean类型返回值，默认false
+		var chk2 = false;
+		$.ajax({
+			url:"chkuser.do",
+			type:"post",
+			data:"type=2&email="+email,
+			async:false,
+			dataType:"text",
+			success:function(flag){
+				//如果返回true表示未重复
+				if(flag=="true"){
+					$("#spaneml").html("√");
+					$("#spaneml").css("color","green");
+					chk2=true;
+				}else{
+					//重复时
+					$("#spaneml").html("邮箱已存在");
+					$("#spaneml").css("color","red");
+					chk2=false;
+				}
+			},
+			error:function(){
+				$("#spaneml").html("请求数据失败，请联系管理员");
+				$("#spaneml").css("color","red");
+			}
+			
+		});
+		return chk2;
 	}
 	
 	//做一个方法将所有的验证方法串起来，并且返回boolean
@@ -203,7 +278,7 @@
 	<div class="clear"></div>
 </div>
 <div class="body-box" style="float:right">
-	<form id="jvForm" action="userupdate.do?id=${user.id }" method="post" onsubmit="chkAll()">
+	<form id="jvForm" action="userupdate.do?id=${user.id }" method="post" onsubmit="return chkAll()">
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
 				<%-- <tr>
@@ -216,7 +291,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						用户名:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="loginname" class="required" name="loginname" maxlength="100" value="${ user.loginname } " onblur="chkloginname()"  />
+						<input  type="text" id="loginname" class="required" name="loginname" maxlength="100" value="${user.loginname} " onblur="chkloginname()"  />
 						<span id="spanlogin"></span>
 					</td>
 				</tr>
@@ -225,7 +300,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						密码:</td><td width="80%" class="pn-fcontent">
-						<input type="text" id="password" class="required" name="password" maxlength="100"  value="${ user.password } " onblur="chkpassword()" />
+						<input type="text" id="password" class="required" name="password" maxlength="100"  value="${user.password} " onblur="chkpassword()" />
 						<span id="spanpwd"></span>
 					</td>
 				</tr>
@@ -234,7 +309,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						确认密码:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="repwd" class="required"  maxlength="100" onblur="chkrepwd()"    />
+						<input  type="text" id="repwd" class="required"  maxlength="100" value="${user.password}" onblur="chkrepwd()"    />
 						<span id="spanrepwd"></span>
 					</td>
 				</tr>
@@ -243,7 +318,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						真实姓名:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="realname" class="required" name="realname" maxlength="100"  value="${ user.realname } " onblur="chkreal()"   />
+						<input  type="text" id="realname" class="required" name="realname" maxlength="100"  value="${user.realname} " onblur="chkreal()"   />
 						<span id="spanreal"></span>
 					</td>
 				</tr>
@@ -251,11 +326,11 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						性别:</td><td width="80%" class="pn-fcontent">
-						<c:if test="${user.sex=='男' }">
+						<c:if test="${user.sex=='男'}">
 							<input type="radio" name="sex" value="1" checked="checked"/>男
 							<input type="radio" name="sex" value="2"/>女
 						</c:if>
-						<c:if test="${user.sex=='女' }">
+						<c:if test="${user.sex=='女'}">
 							<input type="radio" name="sex" value="1" />男
 							<input type="radio" name="sex" value="2" checked="checked"/>女
 						</c:if>
@@ -273,7 +348,7 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						出生日期:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="Wdate" onclick="WdatePicker()" name="birthday" maxlength="80"/>
+						<input type="text" class="Wdate" onclick="WdatePicker()" value="${user.birthday}" name="birthday" maxlength="80"/>
 					</td>
 				</tr>
 				

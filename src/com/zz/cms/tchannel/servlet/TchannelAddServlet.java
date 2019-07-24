@@ -40,20 +40,24 @@ public class TchannelAddServlet extends HttpServlet {
 */
 		//获取页面信息给tcha赋值
 		tcha.setLev(Integer.parseInt(req.getParameter("lev")));
+		//将栏目等级换成文字
 		if (req.getParameter("lev").equals("1")) {
 			tcha.setStrlev("一级");
 		}else{
 			tcha.setStrlev("二级");
 		}
-		tcha.setLev(Integer.parseInt(req.getParameter("isleaf")));
+		//赋值是否叶子
+		//tcha.setLev(Integer.parseInt(req.getParameter("isleaf")));
 		//获取页面信息给tcha赋值
-		if (req.getParameter("isleaf").equals("1")) {
+		/*if (req.getParameter("isleaf").equals("1")) {
 			tcha.setStrIsleaf("是");
 		}else{
 			tcha.setStrIsleaf("不是");
-		}
+		}*/
+		tcha.setIsleaf(1);
+		tcha.setStrIsleaf("是");
 		//获取页面信息给tcha赋值
-		tcha.setSort(Integer.parseInt(req.getParameter("sort")));
+		tcha.setSort(Integer.parseInt(req.getParameter("sort").trim()));
 		
 		
 		try {

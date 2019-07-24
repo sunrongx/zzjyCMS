@@ -16,7 +16,7 @@ public class TfastreportGetByIdServlet extends HttpServlet {
 
 
 	/**
-	 * 
+	 * 串行ID
 	 */
 	private static final long serialVersionUID = -7060929237049768098L;
 
@@ -40,7 +40,8 @@ public class TfastreportGetByIdServlet extends HttpServlet {
 			req.getRequestDispatcher("tfas/update.jsp").forward(req, resp);
 			
 		} catch (SysException e) {
-			e.getErrMsg();
+			//e.getErrMsg();
+			//重定向到错误页面
 			resp.sendRedirect("error.jsp");
 		}
 	}

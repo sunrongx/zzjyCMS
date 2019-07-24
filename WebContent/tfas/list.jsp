@@ -94,10 +94,11 @@
 	</tbody>
 </table>
 
+<%-- 
 <div class="page pb15" >
-
 <input action="tfasdelete.do" id="ids" class="del-button" name="${tfas.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
 </div>
+--%>
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->

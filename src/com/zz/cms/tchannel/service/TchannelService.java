@@ -33,12 +33,13 @@ public class TchannelService {
 	//新增栏目
 	public int insertTcha(TchannelBean tcha) throws BusinessException{
 		//从新增的栏目信息集合中查询栏目名并将查询结果赋值给集合
-		List<TchannelBean> tchas1 = tcd.queryByCname(tcha.getCname());
+		//List<TchannelBean> tchas1 = tcd.queryByCname(tcha.getCname());
 		//判断栏目名是否重复，如果查询结果不为空且有值，说明栏目名重复，抛出商业异常
-		if(tchas1!=null&&tchas1.size()!=0){
+		
+		/*if(tchas1!=null&&tchas1.size()!=0){
 			//将异常信息放到页面上，不重复执行结果，1成功，0失败
 			throw new BusinessException("该栏目名已存在，请重新输入！", 401);
-		}
+		}*/
 		
 		//通过时说明不重复，可以新增
 		return tcd.insertTcha(tcha);
@@ -79,7 +80,9 @@ public class TchannelService {
 	
 	//分页查询所有文章
 	public List<TchannelBean> queryByPage(String name,int page,int size){
+		//给每页开始条数赋值
 		int start = (page-1)*size;
+		//返回通过模糊语句、开始条数和每页数量查到的数据
 		return tcd.queryByPage(name, start, size);
 	}
 	
@@ -87,11 +90,16 @@ public class TchannelService {
 	public int queryPageCounts(int size) {
 		//把文章记录条数转换为总页数
 		int tchaCounts = tcd.queryPageCounts();
+		//判断是否超出整页数
 		if(tchaCounts%size==0){
 			//返回总数能整除每页数量的页数
 			return tchaCounts/size;
 		}
 		//返回总数无法整除每页数量的页数
 		return tchaCounts/size+1;
+	}
+	
+	public int queryByCname(String cname) {
+		return tcd.queryByCname(cname);
 	}
 }

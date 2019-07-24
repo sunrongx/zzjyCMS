@@ -1,15 +1,29 @@
 package com.zz.cms.tchannel.bean;
 
+/**
+ * 栏目bean
+ * @author Administrator
+ *
+ */
 public class TchannelBean {
+	//栏目id
 	private int id;
+	//栏目名称
 	private String cname;
+	//上级栏目
 	private int pid;
+	//栏目级别
 	private int lev;
+	//是否叶子
 	private int isleaf;
+	//栏目顺序
 	private int sort;
 	
+	//上级栏目名称
 	private String pname;
+	//栏目级别文字
 	private String strlev;
+	//是否叶子文字
 	private String strIsleaf;
 	
 	

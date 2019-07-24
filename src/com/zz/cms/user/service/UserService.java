@@ -31,7 +31,7 @@ public class UserService {
 	
 	//新增用户
 	public int insertUser(UserBean user) throws BusinessException{
-		//从新增的用户信息集合中查询用户名并将查询结果赋值给集合
+/*		//从新增的用户信息集合中查询用户名并将查询结果赋值给集合
 		List<UserBean> users1 = ud.queryByLoginname(user.getLoginname());
 		//判断用户名是否重复，如果查询结果不为空且有值，说明用户名重复，抛出商业异常
 		if(users1!=null&&users1.size()!=0){
@@ -50,7 +50,7 @@ public class UserService {
 			
 		}
 		//判断邮箱是否重复，如果查询结果不为空且有值，说明邮箱重复，抛出商业异常
-		
+*/		
 		//都通过时说明全都不重复，可以新增
 		return ud.insertUser(user);
 	}
@@ -81,10 +81,12 @@ public class UserService {
 	}
 	
 	//page表示当前查询页，size表示每页查询数量，返回所有用户信息的集合，并抛出防止数据库问题的异常
-	public List<UserBean> queryUserByPage(String name,int page,int size) throws SysException{
+	//public List<UserBean> queryUserByPage(String name,int page,int size) throws SysException{
+	public List<UserBean> queryUserByPage(String name,String sex,String enabled,int page,int size) throws SysException{
 		//根据当前页数，判断应该从哪条开始循环
 		int start = (page-1)*size;
-		return ud.queryByPage(name, start, size);
+		//return ud.queryByPage(name, start, size);
+		return ud.queryByPage(name, sex, enabled, start, size);
 		
 	}
 	
@@ -101,4 +103,35 @@ public class UserService {
 		
 	}
 	
+	//根据性别查询用户
+	public List<UserBean> queryBySex(String sex,int page,int size){
+		//根据当前页数，判断应该从哪条开始循环
+		int start = (page-1)*size;
+		return ud.queryBySex(sex,start, size);
+	}
+	//根据是否可用查询用户
+	public List<UserBean> queryByEnabled(int enabled,int page,int size){
+		//根据当前页数，判断应该从哪条开始循环
+		int start = (page-1)*size;
+		return ud.queryByEnabled(enabled,start, size);
+	}
+	
+	/**
+	 * 根据用户名查询用户信息
+	 * @param loginname
+	 * @return
+	 */
+	public UserBean queryByLoginname(String loginname){
+		return ud.queryByLoginname(loginname);
+	}
+	
+	/**
+	 * 根据邮箱查询用户信息
+	 * @param email
+	 * @return
+	 * @throws SysException
+	 */
+	public UserBean queryByEmail(String email ) throws SysException{
+		return ud.queryByEmail(email);
+	}
 }

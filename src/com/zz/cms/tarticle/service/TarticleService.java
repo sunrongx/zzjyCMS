@@ -36,12 +36,12 @@ public class TarticleService {
 	//新增文章
 	public int insertTart(TarticleBean tart) throws BusinessException{
 		//从新增的文章信息集合中查询文章名并将查询结果赋值给集合
-		List<TarticleBean> tarts1 = tard.queryBytitle(tart.getTitle());
+		//List<TarticleBean> tarts1 = tard.queryBytitle(tart.getTitle());
 		//判断文章名是否重复，如果查询结果不为空且有值，说明文章名重复，抛出商业异常
-		if(tarts1!=null&&tarts1.size()!=0){
+		/*if(tarts1!=null&&tarts1.size()!=0){
 			//将异常信息放到页面上，不重复执行结果，1成功，0失败
 			throw new BusinessException("该文章名已存在，请重新输入！", 301);
-		}
+		}*/
 		//通过时说明不重复，可以新增
 		return tard.insertTart(tart);
 	}
@@ -91,5 +91,9 @@ public class TarticleService {
 		}
 		//返回总数无法整除每页数量的页数
 		return tartCounts/size+1;
+	}
+	
+	public int queryByTitle(String title) {
+		return tard.queryBytitle(title);
 	}
 }

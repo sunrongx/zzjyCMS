@@ -13,6 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import com.zz.cms.user.bean.UserBean;
 
+/**
+ * 拦截器
+ * @author Administrator
+ *
+ */
 public class URLFilter implements javax.servlet.Filter {
 
 	@Override

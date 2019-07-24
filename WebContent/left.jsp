@@ -219,7 +219,7 @@ H1 a {
 						</table>
 						<ul class="MM">
 
-							<li><a href="tcha.do" target="mainFrame">频道管理</a></li>
+							<li><a href="tcha.do" target="mainFrame">栏目管理</a></li>
 
 							<li><a href="tart.do" target="mainFrame">文章管理</a></li>
 

@@ -83,7 +83,7 @@
 			<td><input type="checkbox" name="ids" value="73"/></td>
 			<td align="center">${tart.id }</td>
 			<td align="center">${tart.title }</td>
-			<td><textarea style="font-size:18px;width:300px;margin:0 -200px 0 0;resize:vertical;">${tart.content }</textarea></td>
+			<td><textarea style="max-height:500px;font-size:18px;width:300px;margin:0 -200px 0 0;resize:vertical;max-length:4000;">${tart.content }</textarea></td>
 			<td align="center">${tart.auther }</td>
 			<td align="center">${tart.ctime }</td>
 			<%-- <td align="center">${tart.channel }</td> --%>
@@ -99,10 +99,11 @@
 	</tbody>
 </table>
 
+<%-- 
 <div class="page pb15" >
-
-<input action="tartdelete.do" id="ids" class="del-button" name="${tart.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
+	<input action="tartdelete.do" id="ids" class="del-button" name="${tart.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
 </div>
+ --%>
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->

@@ -14,7 +14,7 @@ import com.zz.cms.tchannel.service.TchannelService;
 
 public class TchannelGetByIdServlet extends HttpServlet {
 	/**
-	 * 
+	 * 串行ID
 	 */
 	private static final long serialVersionUID = -2251031148815234591L;
 

@@ -13,9 +13,18 @@ import com.zz.cms.tarticle.bean.TarticleBean;
 import com.zz.cms.tfastreport.bean.TfastreportBean;
 import com.zz.cms.tfastreport.service.TfastreportService;
 
-
+/**
+ * 查询所有
+ * @author Administrator
+ *
+ */
 public class QueryTfastreportServlet extends HttpServlet{
 	
+	/**
+	 * 串行ID
+	 */
+	private static final long serialVersionUID = 7850045665759014077L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -28,23 +37,31 @@ public class QueryTfastreportServlet extends HttpServlet{
 		int pageCount = ts.queryPageCounts(size);
 		// 获取当前的页数
 		String p = req.getParameter("currentPage");
+		//初始化页数
 		int page = 1;
 		try {
+			//将获取的页数赋值页数
 			page = Integer.parseInt(p);
+			//判断大于总页数时
 			if (page > pageCount) {
+				//重赋值1
 				page = 1;
 			}
 		} catch (Exception e) {
+			//输入乱七八糟的东西时重赋值1
 			page = 1;
 		}
 		
 		// 模糊查询搜索没有值时，默认为空字符串
 		if (name == null || name.equals(" ")) {
+			//可直接查询所有
 			name = "";
 		}
+		//分页查询所有
 		List<TfastreportBean> tfas = ts.queryByPage(name, page, size);
 		// 获取总页数
 		// req.setAttribute("page", page);
+		//给页面作用域传参
 		req.setAttribute("p", p);
 		req.setAttribute("currentPage", page);
 		req.setAttribute("pageCount", pageCount);

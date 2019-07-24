@@ -32,15 +32,33 @@ function del(){
 	}
 }
 $(function(){
-	$("#zxc").click(function(){
+	$("#nameq").click(function(){
 		var likeName=$("#likeName").val();
 	
 		location.href="userlist.do?name="+likeName;
 	});
 	
+	$("#sexq").click(function(){
+		var likeSex=$("#likeSex").val();
+	
+		location.href="userlist.do?sex="+likeSex;
+	});
+	
+	$("#enabledq").click(function(){
+		var likeEnabled=$("#likeEnabled").val();
+		if(likeEnabled=="可用"){
+			likeEnabled=1;
+		}else{
+			likeEnabled=2;
+		}
+		location.href="userlist.do?enabled="+likeEnabled;
+	});
+	
 });
+
+	
 //文档加载
-$(function(){
+/* $(function(){
 //当选取表头一行的复选框时 下面的全部选中
 $("#ids").click(function(){
 	var eles = $(":checkbox").prop("checked",this.checked);
@@ -52,7 +70,7 @@ $("#ids").click(function(){
 
 })
 })
-
+ */
 
 /* function delAll(){
 	var ids = document.getElementsByName("ids").value;
@@ -68,9 +86,13 @@ $("#ids").click(function(){
 <div class="box-positon">
 	<div class="rpos">当前位置: 用户管理 - 列表</div>
 	<form class="ropt">
-	<div  class="clear">
-	<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="模糊查询......."/>
-	<input type="button" value="查询" id="zxc" />
+<!-- 	<div  class="clear"> -->
+		<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="查询用户名......."/>
+		<input type="button" value="查询" id="nameq" />
+		<input  type="text" name="sex" id="likeSex" class="" value="${sex }" placeholder="查询性别......."/>
+		<input type="button" value="查询" id="sexq" />
+		<input  type="text" name="enabled" id="likeEnabled" class="" value="${enabledTxt }" placeholder="查询可用......."/>
+		<input type="button" value="查询" id="enabledq" />
 	 <input class="add" type="button" value="添加" onclick="javascript:window.location.href='dept.do'"/>
 	</form>
 	<div class="clear"></div>
@@ -115,11 +137,13 @@ $("#ids").click(function(){
 		</c:forEach>
 	</tbody>
 </table>
+<%-- 
 <div class="page pb15" >
 
 <input action="userdelete.do" id="ids" class="del-button" name="${user.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
-</div>
-<div class="page pb15"  style="float:right;">
+</div> 
+--%>
+<%-- <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->
 		[${requestScope.currentPage }/${requestScope.pageCount }]
@@ -131,6 +155,21 @@ $("#ids").click(function(){
 			<a href="userlist.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}">下一页</a>
 		</c:if>
 		<a href="userlist.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}">尾页</a>
+	</span>
+</div> --%>
+
+<div class="page pb15"  style="float:right;">
+<span class="r inb_a page_b">
+		<!-- [当前页/尾页] -->
+		[${requestScope.currentPage }/${requestScope.pageCount }]
+		<a href="userlist.do?currentPage=1&&name=${name }&&sex=${sex}&&enabled=${enabled}">首页</a>
+		<c:if test="${requestScope.currentPage-1>0 }">
+			<a href="userlist.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">上一页</a>
+		</c:if>
+		<c:if test="${requestScope.currentPage+1<=requestScope.pageCount }">
+			<a href="userlist.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">下一页</a>
+		</c:if>
+		<a href="userlist.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">尾页</a>
 	</span>
 </div>
 

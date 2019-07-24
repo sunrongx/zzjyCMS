@@ -19,10 +19,73 @@
 <script src="res/common/js/lecheng.js" type="text/javascript"></script>
 <script src="res/lecheng/js/admin.js" type="text/javascript"></script>
 
+<script type="text/javascript" language="javascript" src="zzcms/js/jquery-1.11.0.min.js"></script>
+
 <link rel="stylesheet" href="res/css/style.css" />
 <title>文章修改</title>
 </head>
 <body>
+
+<script type="text/javascript">
+	var CHKTITLE = /^\D[0-9a-zA-Z\u4e00-\u9fa5]{1,}$/;
+	
+	function chkTitle(){
+		var title = $("#title").val();
+		if(CHKTITLE.test(title)){
+			//给页面提示验证成功
+			if(chkExistTitle(title)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		else {
+			//如果错误要告诉错误原因
+			$("#spantitle").html("文章名称至少两个字符且不能以数字开头");
+			$("#spantitle").css("color","red");
+			//重新获取焦点
+			return false;
+		}
+	}
+	
+	//验证栏目名是否重复
+	function chkExistTitle(title){
+		//定义boolean类型返回值，默认false
+		var chk1 = false;
+		$.ajax({
+			url:"chktart.do",
+			type:"post",
+			data:"title="+title,
+			async:false,
+			dataType:"text",
+			success:function(flag){
+				//如果返回true表示未重复
+				if(flag=="true"){
+					$("#spantitle").html("√");
+					$("#spantitle").css("color","green");
+					chk1=true;
+				}else{
+					//重复时
+					$("#spantitle").html("文章名已存在");
+					$("#spantitle").css("color","red");
+					chk1=false;
+				}
+			},
+			error:function(){
+				$("#spantitle").html("请求数据失败，请联系管理员");
+				$("#spantitle").css("color","red");
+			}
+			
+		});
+		return chk1;
+	}
+	
+	function chkAll(){
+		return chkTitle();
+	}
+	
+</script>
+
 <div class="box-positon">
 	<div class="rpos">当前位置: 文章管理 - 修改</div>
 	<form class="ropt">
@@ -44,7 +107,8 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						文章名:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="title" maxlength="100"     value="${ tart.title } "  />
+						<input type="text" id="title" class="required" name="title" maxlength="100"     value="${tart.title}" onblur="chkTitle()"  />
+						<span id="spantitle"></span>
 					</td>
 				</tr>
 				
@@ -52,13 +116,14 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						内容:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="content" maxlength="100"  value="${ tart.content } "   />
+						<%-- <input type="text" class="required" name="content" maxlength="100"  value="${ tart.content } "   /> --%>
+						<textarea name="content"  style="max-height:500px;font-size:18px;width:300px;margin:0 -200px 0 0;resize:vertical;max-length:4000;">${tart.content }</textarea>
 					</td>
 				</tr>
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						作者:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="auther" maxlength="80"  value=" ${ tart.auther } "  />
+						<input type="text" class="required" name="auther" maxlength="80"  value="${tart.auther}"  />
 					</td>
 				</tr>
 <%-- 				<tr>

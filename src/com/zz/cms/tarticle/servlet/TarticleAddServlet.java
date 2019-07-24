@@ -50,10 +50,13 @@ public class TarticleAddServlet extends HttpServlet {
 			// 添加文章后转发到文章查询页面
 			int i = ts.insertTart(tart);
 			if (i > 0) {
+				//如果添加成功转发到tart.do
 				req.getRequestDispatcher("tart.do").forward(req, resp);
 			}
 		} catch (BusinessException e) {
+			//塞入异常信息
 			req.setAttribute("msg", e.getErrMsg());
+			//转发回添加页面
 			req.getRequestDispatcher("tartadd.do").forward(req, resp);
 		}
 

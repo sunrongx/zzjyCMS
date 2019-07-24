@@ -17,7 +17,7 @@ public interface TarticleDao {
 	//文章新增的判断方法
 	public int insertTart(TarticleBean tart);
 	//根据文章名查询文章信息
-	public List<TarticleBean> queryBytitle(String title);
+	public int queryBytitle(String title);
 	//根据作者查询文章信息
 	public List<TarticleBean> queryByAuther(String auther ) throws SysException;
 	//根据文章ID查询文章信息

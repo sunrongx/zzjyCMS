@@ -32,7 +32,7 @@ public class TfastreportDeleteServlet extends HttpServlet {
 		} catch (SysException e) {
 			// TODO 自动生成的 catch 块
 			e.getErrMsg();
-			//重定向
+			//重定向回首页
 			resp.sendRedirect("tfas.do");
 		}
 	}

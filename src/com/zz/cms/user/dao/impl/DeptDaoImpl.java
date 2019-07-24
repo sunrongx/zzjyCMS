@@ -29,7 +29,7 @@ public class DeptDaoImpl implements DeptDao {
 			
 		}
 		
-		
+		//返回部门集合
 		return depts;
 	}
 	

@@ -9,7 +9,11 @@ public class SysException extends Exception {
 		private int errCode;
 		//异常信息
 		private String errMsg;
-		
+		/**
+		 * 系统异常
+		 * @param errCode
+		 * @param errMsg
+		 */
 		public SysException(int errCode, String errMsg) {
 			this.errCode = errCode;
 			this.errMsg = errMsg;

@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
+/**
+ * 过滤器
+ * @author Administrator
+ *
+ */
 public class FilterDemo implements Filter {
 
 	@Override

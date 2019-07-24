@@ -30,9 +30,10 @@
 <script type="text/javascript">
 	//不能以数字开头、不能纯数字、位数6-18
 	var CHKLOGINNAME=/^\D[0-9a-zA-Z_]{5,15}$/;
+	//不能以数字开头、不能纯数字、位数6-18
 	var CHKPASSWORD=/^\D[0-9a-zA-Z_]{5,15}$/;
 	//邮箱：       xxxx@xxx.xxx.xx
-	var CHKEMAIL=/^[a-zA-Z0-9_]{1,11}@[a-zA-Z0-9]{1,10}\.com$/;
+	var CHKEMAIL=/^[a-zA-Z0-9_]{1,11}@[a-zA-Z0-9]{1,10}\.com|\.net$/;
 	//真实姓名
 	var CHKREALNAME=/^[\u4e00-\u9fa5]{2,}$/;
 	
@@ -45,13 +46,19 @@
 		//获取span元素
 		//var spanEle=document.getElementById("spanlogin");
 		//使用test()方法验证是否符合条件
-		if(CHKLOGINNAME.test($("#loginname").val())){
+		var loginname = $("#loginname").val();
+		if(CHKLOGINNAME.test(loginname)){
 			//给页面提示验证成功
 			//spanEle.innerHTML="√";
-			$("#spanlogin").html("√");
+			//$("#spanlogin").html("√");
 			//spanEle.style.color="green";
-			$("#spanlogin").css("color","green");
-			return true;
+			//$("#spanlogin").css("color","green");
+			if(chkExistLoginname(loginname)){
+				return true;
+			}else{
+				return false;
+			}
+			//return true;
 		}
 		else {
 			//如果错误要告诉错误原因
@@ -67,6 +74,7 @@
 			return false;
 		}
 	}
+	
 	//验证密码
 	function chkpassword() {
 		//获取输入框元素
@@ -109,13 +117,19 @@
 		//获取span元素
 		//var spanEle=document.getElementById("spaneml");
 		//使用test()方法验证是否符合条件
-		if(CHKEMAIL.test($("#email").val())){
+		var email = $("#email").val();
+		if(CHKEMAIL.test(email)){
 			//给页面提示验证成功
 			//spanEle.innerHTML="√";
-			$("#spaneml").html("√");
+			//$("#spaneml").html("√");
 			//spanEle.style.color="green";
-			$("#spaneml").css("color","green");
-			return true;
+			//$("#spaneml").css("color","green");
+			if(chkExistEmail(email)){
+				return true;
+			}else{
+				return false;
+			}
+			//return true;
 		}
 		else {
 			//如果错误要告诉错误原因
@@ -184,10 +198,75 @@
 
 	}
 	
-	//做一个方法将所有的验证方法串起来，并且返回boolean
+	//验证用户名是否重复
+	function chkExistLoginname(loginname){
+		//定义boolean类型返回值，默认false
+		var chk1 = false;
+		$.ajax({
+			url:"chkuser.do",
+			type:"post",
+			data:"type=1&loginname="+loginname,
+			async:false,
+			dataType:"text",
+			success:function(flag){
+				//如果返回true表示未重复
+				if(flag=="true"){
+					$("#spanlogin").html("√");
+					$("#spanlogin").css("color","green");
+					chk1=true;
+				}else{
+					//重复时
+					$("#spanlogin").html("用户名已存在");
+					$("#spanlogin").css("color","red");
+					chk1=false;
+				}
+			},
+			error:function(){
+				$("#spanlogin").html("请求数据失败，请联系管理员");
+				$("#spanlogin").css("color","red");
+			}
+			
+		});
+		return chk1;
+	}
+
+	//验证邮箱是否重复
+	function chkExistEmail(email){
+		//定义boolean类型返回值，默认false
+		var chk2 = false;
+		$.ajax({
+			url:"chkuser.do",
+			type:"post",
+			data:"type=2&email="+email,
+			async:false,
+			dataType:"text",
+			success:function(flag){
+				//如果返回true表示未重复
+				if(flag=="true"){
+					$("#spaneml").html("√");
+					$("#spaneml").css("color","green");
+					chk2=true;
+				}else{
+					//重复时
+					$("#spaneml").html("邮箱已存在");
+					$("#spaneml").css("color","red");
+					chk2=false;
+				}
+			},
+			error:function(){
+				$("#spaneml").html("请求数据失败，请联系管理员");
+				$("#spaneml").css("color","red");
+			}
+			
+		});
+		return chk2;
+	}
+	
+	//返回所有方法的boolean返回，全true才返回true
 	function chkAll() {
 		return chkloginname()&&chkpassword()&&chkemail()&&chkrepwd()&&chkreal();
 	}
+	
 	
 	
 </script>
@@ -264,12 +343,30 @@
 							</c:forEach>
 						</select>
 					</td>
-				</tr>
+				</tr> 
+				<%-- <tr>
+					<td width="20%" class="pn-flabel pn-flabel-h">
+						一级部门:</td><td width="80%" class="pn-fcontent">
+						<select id="d1" onchange="getDept()">
+							<option value="-1">--请选择--</option>
+							<c:forEach items="${depts}" var="dept">
+								<option value="${dept.id}" name="id">${dept.deptname}</option>
+							</c:forEach>
+						</select>
+						二级部门<select id="d2">
+							<option value="-1">--请选择--</option>
+							<c:forEach items="${depts}" var="dep">
+								<option value="${dep.id}" name="id">${dep.deptname}</option>
+							</c:forEach>
+						  </select>
+						
+					</td>
+				</tr>  --%>
 			
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						邮箱:</td><td width="80%" class="pn-fcontent">
-						<input type="text" class="required" name="email" maxlength="80" onblur="chkemail()" id="email"/>
+						<input type="text" class="required" name="email" maxlength="80"  id="email" onblur="chkemail()" />
 						<span id="spaneml"></span>
 					</td>
 				</tr>

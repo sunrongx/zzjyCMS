@@ -11,8 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.zz.cms.tchannel.bean.TchannelBean;
 import com.zz.cms.tchannel.service.TchannelService;
 
+/**
+ * 给添加页面传值
+ * @author Administrator
+ *
+ */
 public class TchannelGetAddServlet extends HttpServlet {
 	
+	/**
+	 * 串行ID
+	 */
+	private static final long serialVersionUID = -4045720385274223729L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

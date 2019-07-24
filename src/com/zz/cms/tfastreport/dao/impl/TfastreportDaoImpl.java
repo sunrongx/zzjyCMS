@@ -34,15 +34,18 @@ public class TfastreportDaoImpl implements TfastreportDao {
 			TfastreportBean tfasbean = new TfastreportBean();
 			//根据key来取map集合的值
 			tfasbean.setId(Integer.parseInt((String) map.get("id")));
+			//赋值标题
 			tfasbean.setTitle((String) map.get("title"));
+			//赋值内容
 			tfasbean.setContent((String) map.get("content"));
+			//赋值创建时间
 			tfasbean.setCtime((String) map.get("ctime"));
 			
-			// 将tfastreportbean对象加入集合中
+			// 将tfastreportbean加入集合中
 			tfass.add(tfasbean);
 		}
 		
-		
+		//返回集合
 		return tfass;
 	}
 
@@ -65,13 +68,17 @@ public class TfastreportDaoImpl implements TfastreportDao {
 			TfastreportBean tfasbean = new TfastreportBean();
 			//根据key来取map集合的值
 			tfasbean.setId(Integer.parseInt((String) map.get("id")));
+			//赋值标题
 			tfasbean.setTitle((String) map.get("title"));
+			//赋值内容
 			tfasbean.setContent((String) map.get("content"));
+			//赋值创建时间
 			tfasbean.setCtime((String) map.get("ctime"));
 			
 			// 将tfastreportbean对象加入集合中
 			tfass.add(tfasbean);
 		}
+		//返回集合
 		return tfass;
 		
 	}
@@ -110,14 +117,19 @@ public class TfastreportDaoImpl implements TfastreportDao {
 	 * 根据广告名查询广告的方法
 	 */
 	@Override
-	public List<TfastreportBean> queryByTitle(String title) {
+	public int queryByTitle(String title) {
 		// TODO 自动生成的方法存根
 		//sql语句
-		String sql="select * from tfastreport where title=? ";
+		String sql="select * from tfastreport where title=?";
 		//将广告名赋值给数组
-		Object [ ] obj = {title};
+		Object [] obj = {title};
 		//返回根据数组信息为条件查询到的结果
-		return this.queryByTiaoJian(sql, obj);
+		List<TfastreportBean> tfas = this.queryByTiaoJian(sql, obj);
+		if(tfas==null||tfas.size()==0) {
+			return 0;
+		}else{
+			return 1;
+		}
 		
 		
 	}
@@ -129,9 +141,11 @@ public class TfastreportDaoImpl implements TfastreportDao {
 	public int updateTfas(TfastreportBean tfas) throws SysException {
 		// TODO 自动生成的方法存根
 		String sql = "update tfastreport set title=?,content=?,ctime=now() where id=?";
+		//参数赋值
 		Object [ ]  obj = { tfas.getTitle(),tfas.getContent(),tfas.getId() };
+		//查询结果获取
 		int result = db.execUpdate(sql,obj);
-		
+		//返回结果数字
 		return result;
 		
 		
@@ -144,6 +158,7 @@ public class TfastreportDaoImpl implements TfastreportDao {
 	public int deleteTfas(int id) throws SysException {
 		// TODO 自动生成的方法存根
 		String sql = "delete from tfastreport where id=?";
+		//添加参数
 		Object []  obj={id};
 		//创建int类型变量接收删除结果
 		int result = db.execUpdate(sql,obj);
@@ -172,9 +187,11 @@ public class TfastreportDaoImpl implements TfastreportDao {
 	public List<TfastreportBean> queryByPage(String name, int start, int size) {
 		// TODO Auto-generated method stub
 		//查询所有，不需要条件和参数，那么直接给null
-		//左外连接
+		//左外连接，将name作为参数进行模糊查询
 		String sql="select * from Tfastreport where title like ? order by id desc limit ?,?";
+		//添加参数
 		Object[] obj={"%"+name+"%",start,size};
+		//返回查询结果
 		return queryByTiaoJian(sql, obj);
 	}
 
@@ -187,10 +204,11 @@ public class TfastreportDaoImpl implements TfastreportDao {
 		// TODO Auto-generated method stub
 		//通过count方法获取总行数并命名为count
 		String sql = "select count(id) count from tfastreport";
+		//将查询结果赋值集合
 		List<Map<String, Object>> list = db.execQuery(sql,null);
 		//获取count的值
 		int tfasCounts = Integer.parseInt((String) list.get(0).get("count"));
-		
+		//返回总页数
 		return tfasCounts;
 	}
 	

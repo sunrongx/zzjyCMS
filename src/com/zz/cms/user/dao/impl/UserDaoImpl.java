@@ -11,6 +11,10 @@ import com.zz.cms.util.DBUtil;
 public class UserDaoImpl implements UserDao {
 	//创建DBUtil对象来连接数据库
 	DBUtil db = new DBUtil();
+	
+	/**
+	 * 登陆验证
+	 */
 	@Override
 	public List<UserBean> login(UserBean user) throws SysException {
 		// TODO 自动生成的方法存根
@@ -28,18 +32,29 @@ public class UserDaoImpl implements UserDao {
 			UserBean userbean = new UserBean();
 			//根据key来取map集合的值
 			userbean.setId(Integer.parseInt((String) map.get("id")));
-			userbean.setLoginname(String.valueOf(map.get("loginname")));
+			//赋值用户名
+			userbean.setLoginname(String.valueOf(map.get("loginname")).trim());
+			//赋值密码
 			userbean.setPassword(String.valueOf(map.get("password")));
+			//赋值真实姓名
 			userbean.setRealname((String) map.get("realname"));
+			//赋值性别
 			userbean.setSex((String) map.get("sex"));
+			//赋值生日
 			userbean.setBirthday((String) map.get("birthday"));
-			userbean.setEmail((String) map.get("email"));
+			//赋值邮箱
+			userbean.setEmail(String.valueOf(map.get("email")).trim());
+			//赋值部门
 			userbean.setDept(Integer.parseInt((String) map.get("dept")));
+			//赋值是否可用
 			userbean.setEnabled(Integer.parseInt((String) map.get("enabled")));
+			//赋值创建人
 			userbean.setCreatman(Integer.parseInt(String.valueOf( map.get("creatman"))));
+			//赋值部门名称
 			if(map.get("deptname")!=null){
 				userbean.setDeptname((String) map.get("deptname"));
 			}
+			//赋值是否可用文字
 			if(userbean.getEnabled()==1){
 				userbean.setEnabledTxt("可用");
 			}else{
@@ -49,6 +64,7 @@ public class UserDaoImpl implements UserDao {
 			// 将userbean对象加入集合中
 			users.add(userbean);
 		}
+		//返回用户集合
 		return users;
 	}
 	
@@ -69,18 +85,29 @@ public class UserDaoImpl implements UserDao {
 			UserBean userbean = new UserBean();
 			//根据key来取map集合的值
 			userbean.setId(Integer.parseInt((String) map.get("id")));
+			//赋值用户名
 			userbean.setLoginname((String) map.get("loginname"));
+			//赋值密码
 			userbean.setPassword((String) map.get("password"));
+			//赋值真实姓名
 			userbean.setRealname((String) map.get("realname"));
+			//赋值性别
 			userbean.setSex((String) map.get("sex"));
+			//赋值生日
 			userbean.setBirthday((String) map.get("birthday"));
+			//赋值邮箱
 			userbean.setEmail((String) map.get("email"));
+			//赋值部门
 			userbean.setDept(Integer.parseInt((String) map.get("dept")));
+			//赋值是否可用
 			userbean.setEnabled(Integer.parseInt((String) map.get("enabled")));
+			//赋值创建人
 			userbean.setCreatman(Integer.parseInt((String) map.get("creatman")));
+			//赋值部门名称
 			if(map.get("deptname")!=null){
 				userbean.setDeptname((String) map.get("deptname"));
 			}
+			//赋值是否可用文字
 			if(userbean.getEnabled()==1){
 				userbean.setEnabledTxt("可用");
 			}else{
@@ -89,6 +116,7 @@ public class UserDaoImpl implements UserDao {
 			// 将userbean对象加入集合中
 			users.add(userbean);
 		}
+		//返回用户集合
 		return users;
 		
 	}
@@ -121,25 +149,35 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	//根据用户名查询信息
-	public List<UserBean> queryByLoginname(String loginname) {
+	public UserBean queryByLoginname(String loginname) {
 		// TODO 自动生成的方法存根
 		String sql="select * from tuser where loginname=? ";
 		//将用户名赋值给数组
 		Object [ ] obj = {loginname};
-		//返回根据数组信息为条件查询到的结果
-		return this.queryByTiaoJian(sql, obj);
+		//根据查询结果返回bean或null
+		if(queryByTiaoJian(sql, obj)!=null&&queryByTiaoJian(sql, obj).size()!=0) {
+			return this.queryByTiaoJian(sql, obj).get(0);
+		}else {
+			return null;
+		}
+		
 	}
 
 
 	@Override
 	//根据邮箱查询信息
-	public List<UserBean> queryByEmail(String email)  {
+	public UserBean queryByEmail(String email)  {
 		// TODO 自动生成的方法存根
 		String sql = "select * from tuser where email=?";
 		//将邮箱赋值给数组
 		Object [ ]  obj  = {email};
-		//返回根据数组信息为条件查询到的结果
-		return this.queryByTiaoJian(sql, obj);
+		//根据查询结果返回bean或null
+		if(queryByTiaoJian(sql, obj)!=null&&queryByTiaoJian(sql, obj).size()!=0) {
+			return this.queryByTiaoJian(sql, obj).get(0);
+		}else {
+			return null;
+		}
+		
 	}
 
 
@@ -182,14 +220,17 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	/**
-	 * 查询用户所有的信息
+	 * 分页查询用户所有的信息
 	 * */
 	@Override
-	public List<UserBean> queryByPage(String name,int start,int size) throws SysException {
+	//public List<UserBean> queryByPage(String name,int start,int size) throws SysException {
+	public List<UserBean> queryByPage(String name,String sex,String enabled,int start,int size) throws SysException {
 		//查询所有，不需要条件和参数，那么直接给null
 		//左外连接
-		String sql="select  u.*,d.deptname from tuser u left join dept d on u.dept=d.id where loginname like ? order by u.id desc limit ?,?";
-		Object[] obj={"%"+name+"%",start,size};
+		//String sql="select  u.*,d.deptname from tuser u left join dept d on u.dept=d.id where loginname like ? order by u.id desc limit ?,?";
+		String sql = "select  u.*,d.deptname from tuser u left join dept d on u.dept=d.id where loginname like ? and sex like ? and enabled like ? order by u.id desc limit ?,?";
+		//Object[] obj={"%"+name+"%",start,size};
+		Object [] obj = {"%"+name+"%","%"+sex+"%","%"+enabled+"%",start,size};
 		return queryByTiaoJian(sql, obj);
 	}
 	
@@ -203,17 +244,48 @@ public class UserDaoImpl implements UserDao {
 		return queryByTiaoJian(sql,objs);
 	}
 */
-
+	/**
+	 * 查询总数
+	 */
 	@Override
 	public int queryUserCounts() throws SysException {
 		// TODO 自动生成的方法存根
 		//通过count方法获取总行数并命名为count
 		String sql = "select count(id) count from tuser";
+		//将查询结果赋值集合
 		List<Map<String, Object>> list = db.execQuery(sql,null);
 		//获取count的值
 		int userCounts = Integer.parseInt((String) list.get(0).get("count"));
-		
+		//返回总数
 		return userCounts;
+	}
+
+	/**
+	 * 根据性别查询用户
+	 */
+	@Override
+	public List<UserBean> queryBySex(String sex,int start,int size) {
+		// TODO Auto-generated method stub
+		//sql语句
+		String sql = "select u.*,d.deptname from tuser u left join dept d on u.dept=d.id order by u.sex desc limit ?,?";
+		//加入参数
+		Object [] obj = {sex,start,size};
+		//返回查询结果
+		return queryByTiaoJian(sql, obj);
+		
+	}
+
+	/**
+	 * 根据是否可用查询用户
+	 */
+	@Override
+	public List<UserBean> queryByEnabled(int enabled,int start,int size) {
+		// TODO Auto-generated method stub
+		String sql = "select u.*,d.deptname from tuser u left join dept d on u.dept=d.id order by u.enabled desc limit ?,?";
+		//加入参数
+		Object [] obj = {enabled,start,size};
+		//返回查询结果
+		return queryByTiaoJian(sql, obj);
 	}
 
 }

@@ -10,7 +10,11 @@ public class AppException extends Exception{
 	private int errCode;
 	//异常信息
 	private String errMsg;
-	
+	/**
+	 * 应用异常
+	 * @param errCode
+	 * @param errMsg
+	 */
 	public AppException(int errCode, String errMsg) {
 		this.errCode = errCode;
 		this.errMsg = errMsg;

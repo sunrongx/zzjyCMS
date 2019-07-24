@@ -30,7 +30,9 @@ public class TchannelUpdateServlet extends HttpServlet {
 //		System.out.println(s1);
 //		tcha.setPid(Integer.parseInt(s1.trim()));
 		String pid = req.getParameter("pid").trim();
+		//判断pid并赋值
 		if(pid.equals("0")) {
+			//为0则赋0
 			tcha.setPid(0);
 		}else {
 /*			for (TchannelBean tch : tcs.queryAll()) {
@@ -38,7 +40,8 @@ public class TchannelUpdateServlet extends HttpServlet {
 					tcha.setPid(tch.getId());
 				}
 			}
-*/
+*/			
+			//如果不为0则赋值
 			tcha.setPid(Integer.parseInt(pid.trim()));
 		}
 		//赋值给tcha

@@ -17,7 +17,7 @@ import com.zz.cms.user.service.UserService;
 
 public class UserAddServlet extends HttpServlet {
 	/**
-	 * 
+	 * 串行ID
 	 */
 	private static final long serialVersionUID = 3019328063624516373L;
 
@@ -29,7 +29,7 @@ public class UserAddServlet extends HttpServlet {
 		UserBean user = new UserBean();
 		UserService us = new UserService();
 		//获取页面信息给user赋值
-		user.setLoginname(req.getParameter("loginname"));
+		user.setLoginname(req.getParameter("loginname").trim());
 		//获取页面信息给user赋值
 		user.setPassword(req.getParameter("password"));
 		//获取页面信息给user赋值
@@ -44,7 +44,7 @@ public class UserAddServlet extends HttpServlet {
 		//获取页面信息给user赋值
 		user.setBirthday(req.getParameter("birthday"));
 		//获取页面信息给user赋值
-		user.setEmail(req.getParameter("email"));
+		user.setEmail(req.getParameter("email").trim());
 		//获取页面信息给user赋值
 		user.setDept(Integer.parseInt(req.getParameter("dept")));
 		//新增用户默认可用，所以为1
@@ -55,20 +55,27 @@ public class UserAddServlet extends HttpServlet {
 		UserBean users = (UserBean) session.getAttribute("userBean");
 		//将登录用户的ID从users赋值进来
 		List<UserBean> list = us.queryAll();
+		//初始化用户ID
 		int uid = 0;
+		//遍历查询结果
 		for (UserBean user1 : list) {
+			//判断用户名是否存在
 			if(users.getLoginname().equals(user1.getLoginname())) {
+				//存在时赋值给uid
 				uid=user1.getId();
 			}
 		}
+		//当uid没有值时
 		if(uid==0) {
 			try {
+				//抛异常
 				throw new AppException(1005, "未获得用户信息！请检查用户设置！");
 			} catch (AppException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
+			//否则将该id赋值给创建人
 			user.setCreatman(uid);
 		}
 		
@@ -89,7 +96,9 @@ public class UserAddServlet extends HttpServlet {
 				req.getRequestDispatcher("userlist.do").forward(req, resp);
 			}
 		} catch (BusinessException e) {
+			//将异常信息作为参数传至作用域
 			req.setAttribute("msg", e.getErrMsg());
+			//转发到部门显示servlet
 			req.getRequestDispatcher("dept.do").forward(req,resp);
 		}
 		

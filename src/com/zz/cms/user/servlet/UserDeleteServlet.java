@@ -38,6 +38,7 @@ public class UserDeleteServlet extends HttpServlet {
 				}
 			}
 */			
+			//删除方法
 			us.deleteUser(Integer.parseInt(id));
 			//重定向
 			resp.sendRedirect("userlist.do");

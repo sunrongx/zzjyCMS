@@ -1,9 +1,6 @@
 package com.zz.cms.user.servlet;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +13,10 @@ import com.zz.cms.exception.BusinessException;
 import com.zz.cms.exception.SysException;
 import com.zz.cms.user.bean.UserBean;
 import com.zz.cms.user.service.UserService;
-import com.zz.cms.util.DBUtil;
 
 public class LoginServlet extends HttpServlet {
 	/**
-	 * 
+	 * 串行ID
 	 */
 	private static final long serialVersionUID = -6791644530059615253L;
 
@@ -55,23 +51,41 @@ public class LoginServlet extends HttpServlet {
 			Cookie cookie1 = new Cookie("username",username);
 			Cookie cookie2 = new Cookie("password",password);
 			//设置cookie时长（秒）
-			cookie1.setMaxAge(600);
-			cookie2.setMaxAge(600);
+			cookie1.setMaxAge(60*60);
+			cookie2.setMaxAge(60*60);
 			
 			//响应给客户端
 			resp.addCookie(cookie1);
 			resp.addCookie(cookie2);
 		} 
+		//创建UserBean对象
 		UserBean userBean = new UserBean();
 		try {
+			//验证登陆的结果赋值UserBean
 			userBean = us.userLogin(user);
 			//排空，当userBean不为空时：
-			if(userBean!=null){
+			/*if(userBean!=null){
 				//创建session
 				
 				//将用户信息中的真实姓名取出并赋值给session
 				session.setAttribute("userBean", userBean);
+				session.setMaxInactiveInterval(60*60);
+			}*/
+			if(userBean.getEnabled()==1){
+				//创建session
 				
+				//将用户信息中的真实姓名取出并赋值给session
+				session.setAttribute("userBean", userBean);
+				//将session过期设置为一小时后
+				session.setMaxInactiveInterval(60*60);
+			}else if(userBean.getEnabled()==2){
+				req.setAttribute("msg1","该账号已冻结，无法登陆，请联系管理员");
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				return;
+			}else {
+				req.setAttribute("msg2","账号或密码错误，请重新输入");
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				return;
 			}
 			
 			//转发主页面
@@ -81,7 +95,8 @@ public class LoginServlet extends HttpServlet {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (BusinessException e) {
-			req.setAttribute("msg", e.getErrMsg());
+			//req.setAttribute("msg", e.getErrMsg());
+			req.setAttribute("msg","账号或密码错误，请重新输入" );
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
 		}

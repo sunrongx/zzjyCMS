@@ -25,6 +25,9 @@
 						
 					</div>
 					<div>
+						<div style="color:red;font-size:16px;">${msg }</div>
+						<div style="color:red;font-size:16px;">${msg1 }</div>
+						<div style="color:red;font-size:16px;">${msg2 }</div>
 						<input type="text" placeholder="请输入账号" name="username" value="${cookie.username.value }" />
 					</div>
 					<div>

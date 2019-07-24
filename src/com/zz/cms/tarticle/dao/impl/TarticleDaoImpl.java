@@ -38,11 +38,13 @@ public class TarticleDaoImpl implements TarticleDao {
 			tartbean.setCtime((String) map.get("ctime"));
 			tartbean.setChannel(Integer.parseInt((String) map.get("channel")));
 			tartbean.setIsremod(Integer.parseInt((String) map.get("isremod")));
+			//根据数字换成文字
 			if(tartbean.getIsremod()==1){
 				tartbean.setStrIsremod("是");
 			}else{
 				tartbean.setStrIsremod("不是");
 			}
+			//根据数字换成文字
 			tartbean.setIshot(Integer.parseInt((String) map.get("ishot")));
 			if(tartbean.getIshot()==1){
 				tartbean.setStrIshot("是");
@@ -53,6 +55,7 @@ public class TarticleDaoImpl implements TarticleDao {
 			// 将userbean对象加入集合中
 			tarts.add(tartbean);
 		}
+		//返回集合
 		return tarts;
 	}
 
@@ -77,7 +80,9 @@ public class TarticleDaoImpl implements TarticleDao {
 			tartbean.setContent((String) map.get("content"));
 			tartbean.setAuther((String) map.get("author"));
 			tartbean.setCtime((String) map.get("ctime"));
+			//获取所属栏目
 			int tch = Integer.parseInt((String) map.get("channel"));
+			//添加所属栏目
 			tartbean.setChannel(tch);
 /*			for(int i = 0;i<queryChan().size();i++) {
 				if(tch==queryChan().get(i).getId()) {
@@ -88,20 +93,25 @@ public class TarticleDaoImpl implements TarticleDao {
 				}
 			}
 */			
+			//查询别名sname来获取所属栏目的名称
 			String strCha = String.valueOf(map.get("sname")).trim();
+			//根据内容判断直接赋值或赋空
 			if(strCha==null||strCha.equals("null")) {
 				tartbean.setStrChannel("无所属栏目");
 			}else {
 				tartbean.setStrChannel(strCha);
 			}
-			
+			//赋值推荐
 			tartbean.setIsremod(Integer.parseInt((String) map.get("isremod")));
+			//将推荐换成文字并赋值
 			if(tartbean.getIsremod()==1){
 				tartbean.setStrIsremod("是");
 			}else{
 				tartbean.setStrIsremod("不是");
 			}
+			//赋值热度
 			tartbean.setIshot(Integer.parseInt((String) map.get("ishot")));
+			//将热度换成文字并赋值
 			if(tartbean.getIshot()==1){
 				tartbean.setStrIshot("是");
 			}else{
@@ -110,6 +120,7 @@ public class TarticleDaoImpl implements TarticleDao {
 			// 将Tarticlebean对象加入集合中
 			tarts.add(tartbean);
 		}
+		//返回赋完值的集合
 		return tarts;
 	}
 	
@@ -142,13 +153,18 @@ public class TarticleDaoImpl implements TarticleDao {
 
 	@Override
 	//根据标题查询文章
-	public List<TarticleBean> queryBytitle(String title) {
+	public int queryBytitle(String title) {
 		// TODO 自动生成的方法存根
 		String sql="select * from tarticle where title=? ";
 		//将文章名赋值给数组
 		Object [ ] obj = {title};
 		//返回根据数组信息为条件查询到的结果
-		return this.queryByTiaoJian(sql, obj);
+		List<TarticleBean> tarts = this.queryByTiaoJian(sql, obj);
+		if(tarts==null||tarts.size()==0) {
+			return 0;
+		}else {
+			return 1;
+		}
 	}
 
 	@Override
@@ -204,17 +220,26 @@ public class TarticleDaoImpl implements TarticleDao {
 	@Override
 	public List<TchannelBean> queryChan() {
 		// TODO Auto-generated method stub
+		//sql语句
 		String sql = "select * from tchannel;";
+		//无参数
 		Object [] objs= {};
+		//查询栏目
 		List<Map<String , Object>> list = db.execQuery(sql, objs);
+		//创建TchannelBean集合
 		List<TchannelBean> tchas = new ArrayList<>();
+		//遍历查询到的集合
 		for (Map<String, Object> map : list) {
+			//创建TchannelBean
 			TchannelBean tch = new TchannelBean();
+			//查到的数据向TchannelBean的属性赋值
 			tch.setId(Integer.parseInt(String.valueOf(map.get("id"))));
 			tch.setCname(String.valueOf(map.get("cname")));
+			//添加到TchannelBean集合
 			tchas.add(tch);
 			
 		}
+		//返回TchannelBean集合
 		return tchas;
 		
 	}
@@ -225,10 +250,12 @@ public class TarticleDaoImpl implements TarticleDao {
 	@Override
 	public List<TarticleBean> queryByPage(String name, int start, int size) {
 		// TODO Auto-generated method stub
-		//查询所有，不需要条件和参数，那么直接给null
-		//左外连接
+		//查询所有
+		//左外连接，将name放在两个%之间赋值，作为模糊查询的条件
 		String sql="select t.*,c.cname sname from tarticle t left join tchannel c on t.channel=c.id where title like ? order by t.id desc limit ?,?";
+		//参数，模糊查询的输入作为拼串条件
 		Object[] obj={"%"+name+"%",start,size};
+		//返回查询到的信息
 		return queryByTiaoJian(sql, obj);
 	}
 
@@ -241,10 +268,11 @@ public class TarticleDaoImpl implements TarticleDao {
 		// TODO Auto-generated method stub
 		//通过count方法获取总行数并命名为count
 		String sql = "select count(id) count from tarticle";
+		//查询并放在集合中
 		List<Map<String, Object>> list = db.execQuery(sql,null);
-		//获取count的值
+		//获取count的值，即总页数
 		int tartCounts = Integer.parseInt((String) list.get(0).get("count"));
-		
+		//返回总页数
 		return tartCounts;
 	}
 

@@ -67,6 +67,7 @@
 			<th>上级栏目</th>
 			<th>栏目级别</th>
 			<th>是否叶子</th>
+			<th>栏目顺序</th>
 			<th>操作选项</th>
 		</tr>
 	</thead>
@@ -79,6 +80,7 @@
 			<td align="center">${tcha.pname }</td>
 			<td align="center">${tcha.strlev }</td>
 			<td align="center">${tcha.strIsleaf }</td>
+			<td align="center">${tcha.sort}</td>
 			<td align="center">
 			<a href="tchaget.do?id=${ tcha.id } " class="pn-opt">修改</a>
 			<a href="tchadelete.do?id=${ tcha.id } " onclick="return del()" class="pn-opt">删除</a>
@@ -87,10 +89,13 @@
 		</c:forEach>
 	</tbody>
 </table>
-<div class="page pb15" >
 
+<%-- 
+<div class="page pb15" >
 	<input action="tchadelete.do" id="ids" class="del-button" name="${tcha.id }" type="submit" value="批量删除"   onclick="if(!confirm('确定删除吗？')){return false; }"/>
-</div>
+</div> 
+--%>
+
 <div class="page pb15"  style="float:right;">
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->

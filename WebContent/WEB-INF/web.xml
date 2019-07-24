@@ -208,8 +208,41 @@
     <url-pattern>/tchadelete.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>chkuser</servlet-name>
+  	<servlet-class>com.zz.cms.user.servlet.ChkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chkuser</servlet-name>
+  	<url-pattern>/chkuser.do</url-pattern>
+  </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>chktcha</servlet-name>
+  	<servlet-class>com.zz.cms.tchannel.servlet.ChkTchannelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chktcha</servlet-name>
+  	<url-pattern>/chktcha.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>chktart</servlet-name>
+  	<servlet-class>com.zz.cms.tarticle.servlet.ChkTarticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chktart</servlet-name>
+  	<url-pattern>/chktart.do</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+  	<servlet-name>chktfas</servlet-name>
+  	<servlet-class>com.zz.cms.tfastreport.servlet.ChkTfastreportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>chktfas</servlet-name>
+  	<url-pattern>/chktfas.do</url-pattern>
+  </servlet-mapping>
 
 <!--配置kaptcha验证码-->
   <servlet>

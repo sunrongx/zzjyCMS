@@ -1,17 +1,27 @@
 package com.zz.cms.tarticle.bean;
 
 public class TarticleBean  {
+	//文章id
 	private int id;
+	//文章标题
 	private String title;
+	//文章内容
 	private String content;
+	//文章作者
 	private String auther;
+	//文章创建时间
 	private String ctime;
+	//文章所属栏目
 	private int channel;
+	//文章是否推荐
 	private int isremod;
+	//文章热度
 	private int ishot;
-	
+	//文章所属栏目名称
 	private String strChannel;
+	//文章推荐文字
 	private String strIsremod;
+	//文章热度文字
 	private String strIshot;
 	
 	public String getStrChannel() {

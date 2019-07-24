@@ -36,11 +36,12 @@ public class UserGetByIdServlet extends HttpServlet {
 			//将对象存储到作用域
 			req.setAttribute("user", user);
 			req.setAttribute("depts", depts);
-			//转发
+			//转发到修改页面
 			req.getRequestDispatcher("user/update.jsp").forward(req, resp);
 			
 		} catch (SysException e) {
-			e.getErrMsg();
+			//e.getErrMsg();
+			//重定向到错误页面
 			resp.sendRedirect("error.jsp");
 		}
 		

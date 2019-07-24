@@ -15,11 +15,9 @@ import com.zz.cms.user.service.UserService;
 public class QueryUserListServlet extends HttpServlet {
 
 	/**
-	 * 
+	 * 串行ID
 	 */
 	private static final long serialVersionUID = -3972072029746230407L;
-	
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -38,29 +36,52 @@ public class QueryUserListServlet extends HttpServlet {
 			//获取当前页数
 			// 获取name的值
 			String name=req.getParameter("name");
+			//获取sex的值
+			String sex = req.getParameter("sex");
+			//获取enabled的值
+			
+			String enabled = req.getParameter("enabled");
+			
 			// 获取当前的页数
 			String p = req.getParameter("currentPage");
+			//初始化页数
 			int page = 1;	
 			try {
+				//获取的页数赋值给页数
 				page = Integer.parseInt(p);
+				//判断页数大于总页数时
 				if(page>pageCount) {
+					//重赋值1
 					page=1;
 				}
 			}catch(Exception e){
+				//输入乱七八糟的东西时重赋值1
 				page = 1;
 			}
 			
 			//模糊查询搜索没有值时，默认为空字符串
 			if(name==null||name.equals(" ")){
+				//没输入默认查询所有
 				name="";
 			}
-			List<UserBean> users = us.queryUserByPage(name,page,size);
-			//获取总页数
+			if(sex==null||sex.equals(" ")){
+				//没输入默认查询所有
+				sex="";
+			}
+			if(enabled==null||enabled.equals(" ")){
+				//没输入默认查询所有
+				enabled="";
+			}
+			//分页查询并赋值集合
+			List<UserBean> users = us.queryUserByPage(name,sex,enabled,page,size);
 //			req.setAttribute("page", page);
+			//将参数塞进作用域
 			req.setAttribute("p", p);
 			req.setAttribute("currentPage", page);
 			req.setAttribute("pageCount", pageCount);
 			req.setAttribute("name", name);	
+			req.setAttribute("sex", sex);	
+			req.setAttribute("enabled", enabled);	
 			
 			//将用户集合存储到req作用域中
 			req.setAttribute("users", users);
@@ -68,6 +89,7 @@ public class QueryUserListServlet extends HttpServlet {
 			req.getRequestDispatcher("user/list.jsp").forward(req,resp);
 		} catch (SysException e) {
 			// TODO Auto-generated catch block
+			//重定向到错误页面
 			resp.sendRedirect("error.html");
 		}
 		

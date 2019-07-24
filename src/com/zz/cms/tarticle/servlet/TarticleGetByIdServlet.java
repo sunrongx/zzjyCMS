@@ -31,18 +31,19 @@ public class TarticleGetByIdServlet extends HttpServlet {
 		try {
 			//使用ID查询并将结果赋值给tart
 			TarticleBean tart = tas.queryTartById(id);
-			//获取全部部门
+			//获取全部文章
 			List<TarticleBean>tarts = tas.queryAll();
+			//查询所属栏目
 			List<TchannelBean> chas = tas.queryChan();
 			//将对象存储到作用域
 			req.setAttribute("tart", tart);
 			req.setAttribute("tarts", tarts);
 			req.setAttribute("chas", chas);
-			//转发
+			//转发到修改页面
 			req.getRequestDispatcher("tart/update.jsp").forward(req, resp);
 			
 		} catch (SysException e) {
-			e.getErrMsg();
+			//重定向到错误页面
 			resp.sendRedirect("error.jsp");
 		}
 	}

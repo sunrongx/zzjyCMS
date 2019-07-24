@@ -34,12 +34,12 @@ public class TfastreportService {
 	//新增广告
 	public int insertTfastreport(TfastreportBean tfas) throws BusinessException{
 		//从新增的广告信息集合中查询广告并将查询结果赋值给集合
-		List<TfastreportBean> tfass1 = td.queryByTitle(tfas.getTitle());
+		//List<TfastreportBean> tfass1 = td.queryByTitle(tfas.getTitle());
 		//判断广告名是否重复，如果查询结果不为空且有值，说明广告名重复，抛出商业异常
-		if(tfass1!=null&&tfass1.size()!=0){
+		/*if(tfass1!=null&&tfass1.size()!=0){
 			//将异常信息放到页面上，不重复执行结果，1成功，0失败
 			throw new BusinessException("该广告名已存在，请重新输入！", 201);
-		}
+		}*/
 		//通过时说明不重复，可以新增
 		return td.insertTfas(tfas);
 	}
@@ -83,5 +83,12 @@ public class TfastreportService {
 		}
 		//返回总数无法整除每页数量的页数
 		return tfasCounts/size+1;
+	}
+	
+	/**
+	 * 根据广告名查询
+	 */
+	public int queryByTitle(String title) {
+		return td.queryByTitle(title);
 	}
 }
