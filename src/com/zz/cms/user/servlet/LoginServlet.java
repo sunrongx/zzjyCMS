@@ -23,9 +23,13 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//创建session
 		HttpSession session = req.getSession();
+		//获取验证码
 		String code = req.getParameter("code");
+		//赋值验证码
 		 String ocode =  (String)session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		 //当验证码为空或错误时报错并返回页面
          if (ocode!=null&&ocode!=""&&!ocode.equalsIgnoreCase(code)) {
 			req.setAttribute("MSG","验证码输入有误");
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
@@ -78,11 +82,14 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("userBean", userBean);
 				//将session过期设置为一小时后
 				session.setMaxInactiveInterval(60*60);
+				//判断账号是否可用
 			}else if(userBean.getEnabled()==2){
+				//不可用时提示并返回登陆页
 				req.setAttribute("msg1","该账号已冻结，无法登陆，请联系管理员");
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 				return;
 			}else {
+				//无法查到时返回登陆页
 				req.setAttribute("msg2","账号或密码错误，请重新输入");
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 				return;

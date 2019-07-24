@@ -33,10 +33,22 @@ public class ChkTchannelServlet extends HttpServlet {
 		
 		//获取loginname参数
 		String cname = req.getParameter("cname");
+		//获取页面id
+		String id1 = req.getParameter("id");
+		//先给id赋不可能查到的值，防止空针
+		int id = -10086;
+		//当查不到id时什么都不做
+		if(id1==null) {
+			
+		}else {
+			//查到id时给id赋值备查
+			id = Integer.parseInt(id1.trim());
+		}
+		
 		//通过loginname查询并赋值结果
-		int i = ts.queryByCname(cname);
-		//将信息响应给ajax
-		if(i==0) {
+		TchannelBean tcha = ts.queryByCname(cname);
+		//将信息响应给ajax，如果查到的数据id和输入框中的cname对应的id一致，说明未做修改，可以通过以赋回原值
+		if(tcha==null||tcha.getId()==id) {
 			//没查到时，回应页面结果
 			PrintWriter pw = resp.getWriter();
 			pw.write("true");

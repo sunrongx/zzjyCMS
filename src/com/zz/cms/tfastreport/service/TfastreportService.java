@@ -88,7 +88,7 @@ public class TfastreportService {
 	/**
 	 * 根据广告名查询
 	 */
-	public int queryByTitle(String title) {
+	public TfastreportBean queryByTitle(String title) {
 		return td.queryByTitle(title);
 	}
 }

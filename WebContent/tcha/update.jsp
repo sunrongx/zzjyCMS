@@ -102,7 +102,7 @@
 		$.ajax({
 			url:"chktcha.do",
 			type:"post",
-			data:"cname="+cname,
+			data:"cname="+cname+"&id="+${tcha.id},
 			async:false,
 			dataType:"text",
 			success:function(flag){

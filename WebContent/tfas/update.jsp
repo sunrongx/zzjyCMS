@@ -54,7 +54,7 @@
 		$.ajax({
 			url:"chktfas.do",
 			type:"post",
-			data:"title="+title,
+			data:"title="+title+"&id="+${tfas.id},
 			async:false,
 			dataType:"text",
 			success:function(flag){

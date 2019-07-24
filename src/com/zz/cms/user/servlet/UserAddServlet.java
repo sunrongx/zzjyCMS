@@ -35,11 +35,12 @@ public class UserAddServlet extends HttpServlet {
 		//获取页面信息给user赋值
 		user.setRealname(req.getParameter("realname"));
 		//获取页面信息给user赋值
-		if (req.getParameter("sex").equals("1")) {
+		/*if (req.getParameter("sex").equals("1")) {
 			user.setSex("男");
-		}else{
+		}else if(req.getParameter("sex").equals("2")){
 			user.setSex("女");
-		}
+		}*/
+		user.setSex(req.getParameter("sex"));
 		
 		//获取页面信息给user赋值
 		user.setBirthday(req.getParameter("birthday"));

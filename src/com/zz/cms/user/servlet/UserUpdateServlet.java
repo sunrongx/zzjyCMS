@@ -28,6 +28,8 @@ public class UserUpdateServlet extends HttpServlet {
 		user.setId(id);
 		//赋值给user用户名
 		user.setLoginname(req.getParameter("loginname").trim());
+		//赋值给user密码
+		user.setPassword(req.getParameter("password"));
 		//赋值给user真实姓名
 		user.setRealname(req.getParameter("realname"));
 		//赋值给user性别

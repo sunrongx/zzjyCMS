@@ -41,7 +41,7 @@ $(function(){
 	$("#sexq").click(function(){
 		var likeSex=$("#likeSex").val();
 	
-		location.href="userlist.do?sex="+likeSex;
+		location.href="userlist.do?gender="+likeSex;
 	});
 	
 	$("#enabledq").click(function(){
@@ -55,6 +55,7 @@ $(function(){
 	});
 	
 });
+
 
 	
 //文档加载
@@ -80,19 +81,24 @@ $("#ids").click(function(){
 } */
 
 //onclick="javascript:window.location.href='userlist.do'"
+
+	function sx(){
+		$("#btn1").click();
+	}
 </script>
 </head>
-<body>
+<body onload="sx">
+
 <div class="box-positon">
 	<div class="rpos">当前位置: 用户管理 - 列表</div>
 	<form class="ropt">
 <!-- 	<div  class="clear"> -->
-		<input  type="text" name="name" id="likeName" class="" value="${name }" placeholder="查询用户名......."/>
+		<input  type="text" name="name" id="likeName" class="" value="${name}" placeholder="查询用户名......."/>
 		<input type="button" value="查询" id="nameq" />
 		<input  type="text" name="sex" id="likeSex" class="" value="${sex }" placeholder="查询性别......."/>
 		<input type="button" value="查询" id="sexq" />
-		<input  type="text" name="enabled" id="likeEnabled" class="" value="${enabledTxt }" placeholder="查询可用......."/>
-		<input type="button" value="查询" id="enabledq" />
+		<input  type="text" name="enabled" id="likeEnabled" class="" value="${enabledTxt}" placeholder="查询可用......."/>
+		<input id="btn1" type="button" value="查询" id="enabledq"  />
 	 <input class="add" type="button" value="添加" onclick="javascript:window.location.href='dept.do'"/>
 	</form>
 	<div class="clear"></div>

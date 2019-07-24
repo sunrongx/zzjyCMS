@@ -37,7 +37,7 @@ public class QueryUserListServlet extends HttpServlet {
 			// 获取name的值
 			String name=req.getParameter("name");
 			//获取sex的值
-			String sex = req.getParameter("sex");
+			String gender = req.getParameter("gender");
 			//获取enabled的值
 			
 			String enabled = req.getParameter("enabled");
@@ -64,23 +64,23 @@ public class QueryUserListServlet extends HttpServlet {
 				//没输入默认查询所有
 				name="";
 			}
-			if(sex==null||sex.equals(" ")){
+			if(gender==null||gender.equals(" ")){
 				//没输入默认查询所有
-				sex="";
+				gender="";
 			}
 			if(enabled==null||enabled.equals(" ")){
 				//没输入默认查询所有
 				enabled="";
 			}
 			//分页查询并赋值集合
-			List<UserBean> users = us.queryUserByPage(name,sex,enabled,page,size);
+			List<UserBean> users = us.queryUserByPage(name,gender,enabled,page,size);
 //			req.setAttribute("page", page);
 			//将参数塞进作用域
 			req.setAttribute("p", p);
 			req.setAttribute("currentPage", page);
 			req.setAttribute("pageCount", pageCount);
 			req.setAttribute("name", name);	
-			req.setAttribute("sex", sex);	
+			req.setAttribute("gender", gender);	
 			req.setAttribute("enabled", enabled);	
 			
 			//将用户集合存储到req作用域中

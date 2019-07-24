@@ -117,18 +117,25 @@ public class TfastreportDaoImpl implements TfastreportDao {
 	 * 根据广告名查询广告的方法
 	 */
 	@Override
-	public int queryByTitle(String title) {
+	public TfastreportBean queryByTitle(String title) {
 		// TODO 自动生成的方法存根
 		//sql语句
 		String sql="select * from tfastreport where title=?";
 		//将广告名赋值给数组
 		Object [] obj = {title};
-		//返回根据数组信息为条件查询到的结果
+		//获取根据数组信息为条件查询到的结果
 		List<TfastreportBean> tfas = this.queryByTiaoJian(sql, obj);
+		//创建bean
+		TfastreportBean tfa = new TfastreportBean();
+		//当查询不到时返回null
 		if(tfas==null||tfas.size()==0) {
-			return 0;
+			return null;
 		}else{
-			return 1;
+			//查到时将id和title放进bean中备用
+			tfa.setId(tfas.get(0).getId());
+			tfa.setTitle(tfas.get(0).getTitle());
+			//返回bean
+			return tfa;
 		}
 		
 		

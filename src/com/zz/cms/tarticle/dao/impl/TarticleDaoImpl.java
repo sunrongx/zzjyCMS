@@ -153,17 +153,24 @@ public class TarticleDaoImpl implements TarticleDao {
 
 	@Override
 	//根据标题查询文章
-	public int queryBytitle(String title) {
+	public TarticleBean queryBytitle(String title) {
 		// TODO 自动生成的方法存根
 		String sql="select * from tarticle where title=? ";
 		//将文章名赋值给数组
 		Object [ ] obj = {title};
-		//返回根据数组信息为条件查询到的结果
+		//获取根据数组信息为条件查询到的结果
 		List<TarticleBean> tarts = this.queryByTiaoJian(sql, obj);
-		if(tarts==null||tarts.size()==0) {
-			return 0;
+		//创建bean
+		TarticleBean tart = new TarticleBean();
+		//当未查到数据时返回null
+		if(tarts==null||tarts.size()==0){
+			return null;
 		}else {
-			return 1;
+			//查到数据时将id和title赋值bean以备用
+			tart.setId(tarts.get(0).getId());
+			tart.setTitle(tarts.get(0).getTitle());
+			//返回bean
+			return tart;
 		}
 	}
 

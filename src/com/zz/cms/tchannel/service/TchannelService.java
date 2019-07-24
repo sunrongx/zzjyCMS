@@ -99,7 +99,7 @@ public class TchannelService {
 		return tchaCounts/size+1;
 	}
 	
-	public int queryByCname(String cname) {
+	public TchannelBean queryByCname(String cname) {
 		return tcd.queryByCname(cname);
 	}
 }

@@ -93,7 +93,7 @@ public class TarticleService {
 		return tartCounts/size+1;
 	}
 	
-	public int queryByTitle(String title) {
+	public TarticleBean queryByTitle(String title) {
 		return tard.queryBytitle(title);
 	}
 }

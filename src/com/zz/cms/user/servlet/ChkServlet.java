@@ -29,6 +29,14 @@ public class ChkServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//获取type参数
 		String type = req.getParameter("type");
+		String id1 = req.getParameter("id");
+		int id=-10086;
+		if(id1==null) {
+			
+		}else {
+			id = Integer.parseInt(id1.trim());
+		}
+		
 		//逻辑层对象
 		UserService us = new UserService();
 		//bean对象
@@ -40,7 +48,7 @@ public class ChkServlet extends HttpServlet {
 			//通过loginname查询并赋值结果
 			user = us.queryByLoginname(loginname);
 			//将信息响应给ajax
-			if(user==null) {
+			if(user==null||user.getId()==id) {
 				//没查到时，回应页面结果
 				PrintWriter pw = resp.getWriter();
 				pw.write("true");
@@ -62,7 +70,7 @@ public class ChkServlet extends HttpServlet {
 				//通过loginname查询并赋值结果
 				user = us.queryByEmail(email);
 				//将信息响应给ajax
-				if(user==null) {
+				if(user==null||user.getId()==id) {
 					//没查到时，回应页面结果
 					PrintWriter pw = resp.getWriter();
 					pw.write("true");

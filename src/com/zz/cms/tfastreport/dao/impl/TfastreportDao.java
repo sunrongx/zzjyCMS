@@ -16,7 +16,7 @@ public interface TfastreportDao {
 	//广告新增的判断方法
 	public int insertTfas(TfastreportBean tadv);
 	//根据广告名查询广告信息
-	public int queryByTitle(String title);
+	public TfastreportBean queryByTitle(String title);
 	//修改广告的方法
 	public int updateTfas(TfastreportBean tadv) throws SysException;
 	//删除广告的方法

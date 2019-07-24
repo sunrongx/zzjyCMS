@@ -121,6 +121,7 @@
 			//$("#spaneml").html("√");
 			//spanEle.style.color="green";
 			//$("#spaneml").css("color","green");
+			
 			if(chkExistEmail(email)){
 				return true;
 			}else{
@@ -202,7 +203,7 @@
 		$.ajax({
 			url:"chkuser.do",
 			type:"post",
-			data:"type=1&loginname="+loginname,
+			data:"type=1&loginname="+loginname+"&id="+${user.id},
 			async:false,
 			dataType:"text",
 			success:function(flag){
@@ -234,7 +235,7 @@
 		$.ajax({
 			url:"chkuser.do",
 			type:"post",
-			data:"type=2&email="+email,
+			data:"type=2&email="+email+"&id="+${user.id},
 			async:false,
 			dataType:"text",
 			success:function(flag){
@@ -278,7 +279,7 @@
 	<div class="clear"></div>
 </div>
 <div class="body-box" style="float:right">
-	<form id="jvForm" action="userupdate.do?id=${user.id }" method="post" onsubmit="return chkAll()">
+	<form id="jvForm" action="userupdate.do?id=${user.id}" method="post" onsubmit="return chkAll()">
 		<table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
 			<tbody>
 				<%-- <tr>
@@ -291,7 +292,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						用户名:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="loginname" class="required" name="loginname" maxlength="100" value="${user.loginname} " onblur="chkloginname()"  />
+						<input  type="text" id="loginname" class="required" name="loginname" maxlength="100" value="${user.loginname}" onblur="chkloginname()"  />
 						<span id="spanlogin"></span>
 					</td>
 				</tr>
@@ -300,7 +301,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						密码:</td><td width="80%" class="pn-fcontent">
-						<input type="text" id="password" class="required" name="password" maxlength="100"  value="${user.password} " onblur="chkpassword()" />
+						<input type="text" id="password" class="required" name="password" maxlength="100"  onblur="chkpassword()" />
 						<span id="spanpwd"></span>
 					</td>
 				</tr>
@@ -309,7 +310,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						确认密码:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="repwd" class="required"  maxlength="100" value="${user.password}" onblur="chkrepwd()"    />
+						<input  type="text" id="repwd" class="required"  maxlength="100"  onblur="chkrepwd()"    />
 						<span id="spanrepwd"></span>
 					</td>
 				</tr>
@@ -318,7 +319,7 @@
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						<span class="pn-frequired">*</span>
 						真实姓名:</td><td width="80%" class="pn-fcontent">
-						<input  type="text" id="realname" class="required" name="realname" maxlength="100"  value="${user.realname} " onblur="chkreal()"   />
+						<input  type="text" id="realname" class="required" name="realname" maxlength="100"  value="${user.realname}" onblur="chkreal()"   />
 						<span id="spanreal"></span>
 					</td>
 				</tr>
@@ -381,7 +382,7 @@
 							<option value="${dept.id}" selected="selected">${dept.deptname}</option>
 							</c:if>
 								<!-- 显示其他部门 -->
-								<c:if test="${user.dept!=dept.id }">
+								<c:if test="${user.dept!=dept.id}">
 								<option value="${dept.id}" >${dept.deptname}</option></c:if>
 							</c:forEach>
 					</select>
@@ -392,7 +393,7 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						邮箱:</td><td width="80%" class="pn-fcontent">
-						<input type="text" id="email" class="required" name="email" maxlength="80"  value=" ${ user.email } " onblur="chkemail()" />
+						<input type="text" id="email" class="required" name="email" maxlength="80"  value="${user.email}" onblur="chkemail()" />
 						<span id="spaneml"></span>
 					</td>
 				</tr>
@@ -400,11 +401,11 @@
 				<tr>
 					<td width="20%" class="pn-flabel pn-flabel-h">
 						是否可用:</td><td width="80%" class="pn-fcontent">
-						<c:if test="${user.enabled==1 }">
+						<c:if test="${user.enabled==1}">
 							<input type="radio" class="required" name="enabled"  maxlength="80" value="1" checked="checked"/>可用
 							<input type="radio" class="required" name="enabled"  maxlength="80" value="2"/>不可用
 						</c:if>
-						<c:if test="${user.enabled==2 }">
+						<c:if test="${user.enabled==2}">
 							<input type="radio" class="required" name="enabled" maxlength="80" value="1"/>可用
 							<input type="radio" class="required" name="enabled" maxlength="80" value="2" checked="checked"/>不可用
 						</c:if>

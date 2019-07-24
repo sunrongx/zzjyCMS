@@ -213,19 +213,26 @@ public class TchannelDaoImpl implements TchannelDao {
 	/**
 	 * 根据栏目名查询栏目
 	 */
-	public int queryByCname(String cname) {
+	public TchannelBean queryByCname(String cname) {
 		// TODO 自动生成的方法存根
 		String sql="select * from tchannel where cname=? ";
 		//将栏目名赋值给数组
 		Object [ ] obj = {cname};
-		//返回根据数组信息为条件查询到的结果
+		//获取根据数组信息为条件查询到的结果
 		List<Map<String , Object>> tchas = db.execQuery(sql, obj);
+		//创建bean
+		TchannelBean tcha = new TchannelBean();
+		//当没查到数据时返回null
 		if(tchas==null||tchas.size()==0) {
-			return 0;
+			return null;
 		}else {
-			return 1;
+			//查到数据就将其中的id和cname存进bean备用
+			tcha.setId(Integer.parseInt(String.valueOf(tchas.get(0).get("id"))));
+			tcha.setCname(String.valueOf(tchas.get(0).get("cname")));
+			//返回bean
+			return tcha;
 		}
-		
+			
 	}
 
 	@Override

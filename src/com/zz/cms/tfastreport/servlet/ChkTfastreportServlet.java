@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zz.cms.tarticle.service.TarticleService;
+import com.zz.cms.tfastreport.bean.TfastreportBean;
 import com.zz.cms.tfastreport.service.TfastreportService;
 
 public class ChkTfastreportServlet extends HttpServlet {
@@ -31,10 +32,21 @@ public class ChkTfastreportServlet extends HttpServlet {
 		
 		//获取loginname参数
 		String title = req.getParameter("title");
+		//获取页面id
+		String id1 = req.getParameter("id");
+		//先给id赋不可能查到的值，防止空针
+		int id = -10086;
+		//当查不到id时什么都不做
+		if(id1==null) {
+			
+		}else {
+			//查到id时给id赋值备查
+			id = Integer.parseInt(id1.trim());
+		}
 		//通过loginname查询并赋值结果
-		int i = tfs.queryByTitle(title);
+		TfastreportBean tfas = tfs.queryByTitle(title);
 		//将信息响应给ajax
-		if(i==0) {
+		if(tfas==null||tfas.getId()==id) {
 			//没查到时，回应页面结果
 			PrintWriter pw = resp.getWriter();
 			pw.write("true");

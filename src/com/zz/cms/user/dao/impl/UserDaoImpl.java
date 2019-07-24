@@ -7,6 +7,7 @@ import java.util.Map;
 import com.zz.cms.exception.SysException;
 import com.zz.cms.user.bean.UserBean;
 import com.zz.cms.util.DBUtil;
+import com.zz.cms.util.MD5;
 
 public class UserDaoImpl implements UserDao {
 	//创建DBUtil对象来连接数据库
@@ -21,7 +22,10 @@ public class UserDaoImpl implements UserDao {
 		//登录查询的SQL语句
 		String sql="select * from tuser where loginname=? and password=? order by id";
 		//给SQL语句的参数赋值
-		Object [] obj = {user.getLoginname(),user.getPassword()};
+		MD5 md5 = new MD5();
+		String md = md5.getMD5ofStr(user.getPassword());
+		//System.out.println(md);
+		Object [] obj = {user.getLoginname(),md};
 		//执行查询，返回结果
 		List<Map<String, Object>> list = db.execQuery(sql,obj);
 		//创建list集合来存储user对象
@@ -131,13 +135,13 @@ public class UserDaoImpl implements UserDao {
 		//返回根据sql语句查询的结果
 		return queryByTiaoJian(sql,null);
 	}
-
+	
 
 	@Override
 	public int insertUser(UserBean user) {
 		// TODO 自动生成的方法存根
 		//添加用户信息的sql语句
-		String sql="insert into tuser values(null,?,?,?,?,?,?,?,?,?)";
+		String sql="insert into tuser values(null,?,md5(?),?,?,?,?,?,?,?)";
 		//创建获得用户信息的Object数组
 		Object [ ] obj = {user.getLoginname(),user.getPassword(),user.getRealname(),user.getSex(),user.getBirthday(),user.getDept(),user.getEmail(),user.getEnabled(),user.getCreatman() };
 		//使用新增方法新增用户信息，将新增的结果赋值给int类型的result
@@ -197,9 +201,9 @@ public class UserDaoImpl implements UserDao {
 	//修改用户信息
 	public int updateUser(UserBean user) throws SysException {
 		// TODO 自动生成的方法存根
-		String sql = "update tuser set loginname=?,realname=?,sex=?,birthday=?,email=?,dept=?,enabled=?  where id=?";
+		String sql = "update tuser set loginname=?,password=md5(?),realname=?,sex=?,birthday=?,email=?,dept=?,enabled=?  where id=?";
 		//创建数组
-		Object [ ]  obj = { user.getLoginname(),user.getRealname(),user.getSex(),user.getBirthday(),user.getEmail(),user.getDept(),user.getEnabled(),user.getId() };
+		Object [ ]  obj = { user.getLoginname(),user.getPassword(),user.getRealname(),user.getSex(),user.getBirthday(),user.getEmail(),user.getDept(),user.getEnabled(),user.getId() };
 		//将修改结果赋值给int类型的值
 		int result = db.execUpdate(sql,obj);
 		//返回该结果值

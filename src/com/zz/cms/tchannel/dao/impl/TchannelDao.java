@@ -16,7 +16,7 @@ public interface TchannelDao {
 	//栏目新增的判断方法
 	public int insertTcha(TchannelBean tcha);
 	//通过栏目名查询栏目
-	public int queryByCname(String cname);
+	public TchannelBean queryByCname(String cname);
 	//根据栏目ID查询文章信息
 	public List<TchannelBean> queryTchaById(int id) throws SysException;
 	//修改栏目的方法

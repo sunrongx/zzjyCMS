@@ -55,7 +55,7 @@
 		$.ajax({
 			url:"chktart.do",
 			type:"post",
-			data:"title="+title,
+			data:"title="+title+"&id="+${tart.id},
 			async:false,
 			dataType:"text",
 			success:function(flag){
