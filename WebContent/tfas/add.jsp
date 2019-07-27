@@ -94,7 +94,7 @@
 <div class="box-positon">
 	<div class="rpos">当前位置: 广告管理 - 添加</div>
 	<form class="ropt">
-		<input type="submit" onclick="this.form.action='tfas/tfas.do';" value="返回列表" class="return-button"/>
+		<input type="submit" onclick="this.form.action='/zzcms/tfas.do';" value="返回列表" class="return-button"/>
 	</form>
 	<div class="clear"></div>
 </div>

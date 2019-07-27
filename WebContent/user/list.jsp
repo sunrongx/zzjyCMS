@@ -48,8 +48,10 @@ $(function(){
 		var likeEnabled=$("#likeEnabled").val();
 		if(likeEnabled=="可用"){
 			likeEnabled=1;
-		}else{
+		}else if(likeEnabled=="不可用"){
 			likeEnabled=2;
+		}else{
+			likeEnabled="";
 		}
 		location.href="userlist.do?enabled="+likeEnabled;
 	});
@@ -82,9 +84,10 @@ $("#ids").click(function(){
 
 //onclick="javascript:window.location.href='userlist.do'"
 
-	function sx(){
+/* 	function sx(){
 		$("#btn1").click();
 	}
+	 */
 </script>
 </head>
 <body onload="sx">
@@ -98,7 +101,7 @@ $("#ids").click(function(){
 		<input  type="text" name="sex" id="likeSex" class="" value="${sex }" placeholder="查询性别......."/>
 		<input type="button" value="查询" id="sexq" />
 		<input  type="text" name="enabled" id="likeEnabled" class="" value="${enabledTxt}" placeholder="查询可用......."/>
-		<input id="btn1" type="button" value="查询" id="enabledq"  />
+		<input <%-- id="btn1" --%> type="button" value="查询" id="enabledq"  />
 	 <input class="add" type="button" value="添加" onclick="javascript:window.location.href='dept.do'"/>
 	</form>
 	<div class="clear"></div>
@@ -168,14 +171,14 @@ $("#ids").click(function(){
 <span class="r inb_a page_b">
 		<!-- [当前页/尾页] -->
 		[${requestScope.currentPage }/${requestScope.pageCount }]
-		<a href="userlist.do?currentPage=1&&name=${name }&&sex=${sex}&&enabled=${enabled}">首页</a>
+		<a href="userlist.do?currentPage=1&name=${name }&gender=${gender}&enabled=${enabled}">首页</a>
 		<c:if test="${requestScope.currentPage-1>0 }">
-			<a href="userlist.do?currentPage=${requestScope.currentPage-1 }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">上一页</a>
+			<a href="userlist.do?currentPage=${requestScope.currentPage-1 }&name=${requestScope.name}&gender=${requestScope.gender}&enabled=${requestScope.enabled}">上一页</a>
 		</c:if>
 		<c:if test="${requestScope.currentPage+1<=requestScope.pageCount }">
-			<a href="userlist.do?currentPage=${requestScope.currentPage+1 }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">下一页</a>
+			<a href="userlist.do?currentPage=${requestScope.currentPage+1 }&name=${requestScope.name}&gender=${requestScope.gender}&enabled=${requestScope.enabled}">下一页</a>
 		</c:if>
-		<a href="userlist.do?currentPage=${requestScope.pageCount }&&name=${requestScope.name}&&sex=${requestScope.sex}&&enabled=${requestScope.enabled}">尾页</a>
+		<a href="userlist.do?currentPage=${requestScope.pageCount }&name=${requestScope.name}&gender=${requestScope.gender}&enabled=${requestScope.enabled}">尾页</a>
 	</span>
 </div>
 

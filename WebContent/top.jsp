@@ -26,7 +26,7 @@
 			</span>
 			
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;感谢登录使用！</td>
-        <td width="22%"><a href="/admin/login.do" target="parent"><img src="images/out.gif" alt="安全退出" width="46" height="20" border="0"></a></td>
+        <td width="22%"><a href="login.do" target="parent"><img src="images/out.gif" alt="安全退出" width="46" height="20" border="0"></a></td>
         <td width="4%">&nbsp;</td>
       </tr>
       <tr>
